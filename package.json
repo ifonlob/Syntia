@@ -1,0 +1,31 @@
+{
+  "name": "syntia",
+  "version": "1.0.0",
+  "description": "**Syntia** es una aplicación web diseñada para ayudar a personas con enfermedades crónicas a registrar y consultar su evolución diaria. Su objetivo es facilitar el seguimiento personal de síntomas, niveles de energía, descanso, estrés y medicación, permitiendo que el usuario observe cómo evoluciona su estado a lo largo del tiempo.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ifonlob/Syntia.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/ifonlob/Syntia/issues"
+  },
+  "homepage": "https://github.com/ifonlob/Syntia#readme",
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.15.0",
+    "eslint-config-prettier": "^10.1.8",
+    "globals": "^17.14.0",
+    "prettier": "^3.10.1"
+  }
+}

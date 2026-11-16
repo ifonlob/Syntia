@@ -1,13 +1,5 @@
 "use strict";
 
-import {
-  entradasDiarias,
-  definicionesSintomas,
-  aparicionesSintomas,
-  medicamentos,
-  tomasMedicacion,
-} from "./datos.js";
-
 export const cargarHistorial = (
   entradasDiarias,
   definicionesSintomas,
@@ -33,9 +25,11 @@ export const cargarHistorial = (
   cabecera.append(titulo);
   cabecera.append(subtitulo);
 
-  contenedorPrincipal.append(cabecera);
-
   const historialListado = document.createElement("section");
+  historialListado.classList.add("historial__listado");
+
+  contenedorPrincipal.append(cabecera);
+  contenedorPrincipal.append(historialListado);
 
   entradasDiarias.forEach((entrada) => {
     const tarjeta = document.createElement("article");
@@ -49,6 +43,9 @@ export const cargarHistorial = (
     fechaTarjeta.classList.add("tarjeta-entrada__fecha");
     tituloTarjeta.classList.add("tarjeta-entrada__titulo");
     listaDatos.classList.add("tarjeta-entrada__lista");
+
+    cabeceraTarjeta.append(fechaTarjeta);
+    cabeceraTarjeta.append(tituloTarjeta);
 
     const filaSueno = document.createElement("li");
     const filaEnergia = document.createElement("li");
@@ -95,6 +92,14 @@ export const cargarHistorial = (
     filaEnergiaImagen.src = "./assets/icons/rayo.svg";
     filaEstresImagen.src = "./assets/icons/sonrisa.svg";
 
+    fechaTarjeta.textContent = entrada.fecha;
+
+    valorSueno.textContent = `${entrada.horasSueno} h`;
+    valorEnergia.textContent = `${entrada.nivelEnergia}/10`;
+    valorEstres.textContent = `${entrada.nivelEstres}/10`;
+
+    tituloTarjeta.textContent = "Registro diario";
+
     tituloSueno.textContent = "Sueño";
     tituloEnergia.textContent = "Energía";
     tituloEstres.textContent = "Estrés";
@@ -115,8 +120,22 @@ export const cargarHistorial = (
     listaDatos.append(filaEnergia);
     listaDatos.append(filaEstres);
 
-    tarjeta.append(listaDatos);
+    const botonDetalles = document.createElement("button");
+    const imagenBotonDetalles = document.createElement("img");
 
-    const botonDetalles = document.createElement;
+    botonDetalles.textContent = "Ver detalles";
+    botonDetalles.classList.add("tarjeta-entrada__boton");
+    botonDetalles.type = "button";
+
+    imagenBotonDetalles.classList.add("tarjeta-entrada__flecha");
+    imagenBotonDetalles.src = "./assets/icons/flecha-fina.svg";
+
+    botonDetalles.append(imagenBotonDetalles);
+
+    tarjeta.append(cabeceraTarjeta);
+    tarjeta.append(listaDatos);
+    tarjeta.append(botonDetalles);
+
+    historialListado.append(tarjeta);
   });
 };
