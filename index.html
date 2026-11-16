@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="./assets/css/styles.css" />
     <script type="module" src="js/main.js"></script>
   </head>
-  <body class="aplicacion" data-page="home">
+  <body class="aplicacion">
     <a class="utilidad-saltar" href="#main-content">Saltar al contenido principal</a>
     <aside class="barra-lateral" aria-label="Navegación de Syntia">
       <a class="marca" href="index.html" aria-label="Syntia, ir al inicio">
@@ -46,7 +46,6 @@
               class="navegacion__enlace navegacion__enlace--actual"
               href="index.html"
               data-section="inicio"
-              aria-current="page"
             >
               <svg
                 class="navegacion__icono"
@@ -285,18 +284,15 @@
         <span class="barra-lateral__version">SYNTIA / SEGUIMIENTO PERSONAL</span>
       </footer>
     </aside>
-    <main class="contenido-principal" id="main-content">
+    <main class="contenido-principal">
       <header class="cabecera-superior">
         <p class="cabecera-superior__fecha">
-          <time id="current-date" datetime="2026-11-16">lunes, 16 de noviembre de 2026</time>
+          <time id="fecha-actual" datetime="2026-11-16">lunes, 16 de noviembre de 2026</time>
         </p>
       </header>
-      <section class="bienvenida" aria-labelledby="page-title">
-        <p class="texto-ceja">
-          <span class="bienvenida__destello" aria-hidden="true">✳</span> TU ESPACIO DE SEGUIMIENTO
-        </p>
-        <h1 class="bienvenida__titulo" id="page-title">
-          <span class="bienvenida__saludo" id="greeting-text">Hola</span>,<br />hoy vamos a tu
+      <section class="bienvenida">
+        <h1 class="bienvenida__titulo">
+          <span class="bienvenida__saludo">Hola</span>,<br />hoy vamos a tu
           ritmo.
         </h1>
         <p class="bienvenida__descripcion">
@@ -342,11 +338,9 @@
         </svg>
       </section>
 
-      <section class="cuadricula-resumen" aria-labelledby="resumen-titulo">
-        <h2 class="utilidad-oculta" id="resumen-titulo">Resumen de tu seguimiento</h2>
-        <article class="tarjeta-ultimo" aria-labelledby="latest-title">
-          <header class="tarjeta-ultimo__cabecera">
-            <span class="icono-insignia icono-insignia--turquesa" aria-hidden="true">
+      <section class="cuadricula-resumen">
+        <article class="tarjeta-entrada">
+          <header class="tarjeta-entrada__cabecera">
               <svg
                 aria-hidden="true"
                 width="25"
@@ -361,16 +355,15 @@
                 <path d="M2 12h4l2.1-6 4.1 12 2.2-6H22" />
               </svg>
             </span>
-            <section class="tarjeta-ultimo__encabezado" aria-label="Fecha del último registro">
+            <section class="tarjeta-entrada__encabezado" aria-label="Fecha del último registro">
               <p class="texto-ceja">TU PUNTO DE PARTIDA</p>
-              <h2 class="titulo-tarjeta" id="latest-title">Tu último registro</h2>
-              <time class="tarjeta-ultimo__fecha" id="latest-entry-date" datetime="2026-11-16"
+              <h2 class="titulo-tarjeta">Tu último registro</h2>
+              <time class="tarjeta-entrada__fecha" datetime="2026-11-16"
                 >Consultando tus registros…</time
               >
             </section>
             <a
-              class="enlace-texto tarjeta-ultimo__enlace"
-              id="latest-detail-link"
+              class="enlace-texto tarjeta-entrada__enlace"
               href="seccion.html?seccion=historial"
               aria-label="Consultar el detalle del último registro"
               >Ver detalle <span aria-hidden="true">↗</span></a
@@ -394,9 +387,7 @@
               </svg>
               Sueño
             </dt>
-            <dd class="metricas-ultimo__valor metricas-ultimo__valor--primero" id="sleep-value">
-              —
-            </dd>
+            <dd class="metricas-ultimo__valor metricas-ultimo__valor--primero">—</dd>
             <dt class="metricas-ultimo__termino metricas-ultimo__termino--segundo">
               <svg
                 class="metricas-ultimo__icono"
@@ -410,9 +401,9 @@
               </svg>
               Energía
             </dt>
-            <dd class="metricas-ultimo__valor metricas-ultimo__valor--segundo" id="energy-value">
+            <dd class="metricas-ultimo__valor metricas-ultimo__valor--segundo">
               —
-              <ol id="energy-scale" class="escala-puntos" aria-label="Escala de energía"></ol>
+              <ol class="escala-puntos" aria-label="Escala de energía"></ol>
             </dd>
             <dt class="metricas-ultimo__termino metricas-ultimo__termino--tercero">
               <svg
@@ -432,13 +423,13 @@
               </svg>
               Estrés
             </dt>
-            <dd class="metricas-ultimo__valor metricas-ultimo__valor--tercero" id="stress-value">
+            <dd class="metricas-ultimo__valor metricas-ultimo__valor--tercero">
               —
-              <ol id="stress-scale" class="escala-puntos" aria-label="Escala de estrés"></ol>
+              <ol class="escala-puntos" aria-label="Escala de estrés"></ol>
             </dd>
           </dl>
-          <p class="tarjeta-ultimo__pie">
-            UN DÍA A LA VEZ <span class="tarjeta-ultimo__destello" aria-hidden="true">✳</span>
+          <p class="tarjeta-entrada__pie">
+            UN DÍA A LA VEZ <span class="tarjeta-entrada__destello" aria-hidden="true">✳</span>
           </p>
         </article>
 
@@ -463,10 +454,10 @@
             ></span>
             <section class="tarjeta-sintomas__encabezado" aria-label="Síntomas del último registro">
               <p class="texto-ceja">ESCUCHA A TU CUERPO</p>
-              <h2 class="titulo-tarjeta" id="symptoms-title">Síntomas registrados</h2>
+              <h2 class="titulo-tarjeta">Síntomas registrados</h2>
             </section>
           </header>
-          <ul class="tarjeta-sintomas__lista" id="latest-symptoms" aria-live="polite">
+          <ul class="tarjeta-sintomas__lista">
             <li class="estado-vacio">Los síntomas registrados aparecerán aquí.</li>
           </ul>
           <a class="enlace-texto tarjeta-sintomas__enlace" href="seccion.html?seccion=historial"
@@ -495,7 +486,7 @@
           </svg>
         </article>
 
-        <article class="actividad-semanal" aria-labelledby="weekly-title">
+        <article class="actividad-semanal">
           <header class="actividad-semanal__cabecera">
             <span class="icono-insignia icono-insignia--borde" aria-hidden="true"
               ><svg
@@ -514,17 +505,11 @@
             ></span>
             <section class="actividad-semanal__titular">
               <p class="texto-ceja">CONSTANCIA, NO PERFECCIÓN</p>
-              <h2 class="titulo-tarjeta" id="weekly-title">Últimos 7 días</h2>
+              <h2 class="titulo-tarjeta">Últimos 7 días</h2>
             </section>
           </header>
-          <p class="actividad-semanal__total" id="weekly-total" aria-live="polite">
-            Calculando actividad…
-          </p>
-          <ul
-            class="actividad-semanal__grafica"
-            id="weekly-chart"
-            aria-label="Actividad de los últimos siete días"
-          >
+          <p class="actividad-semanal__total">Calculando actividad…</p>
+          <ul class="actividad-semanal__grafica" aria-label="Actividad de los últimos siete días">
             <li class="actividad-semanal__dia">
               <span
                 class="actividad-semanal__barra actividad-semanal__barra--vacia"
@@ -578,11 +563,11 @@
           <p class="actividad-semanal__nota">Cada registro suma información a tu recorrido.</p>
         </article>
 
-        <article class="actividad-reciente" aria-labelledby="recent-title">
+        <article class="actividad-reciente">
           <header class="actividad-reciente__cabecera">
             <section class="actividad-reciente__titular">
               <p class="texto-ceja">TU RECORRIDO</p>
-              <h2 class="titulo-tarjeta" id="recent-title">Actividad reciente</h2>
+              <h2 class="titulo-tarjeta">Actividad reciente</h2>
             </section>
             <a
               class="enlace-texto actividad-reciente__enlace"
@@ -591,11 +576,7 @@
               >Ver todo <span aria-hidden="true">↗</span></a
             >
           </header>
-          <ul
-            class="lista-historial lista-historial--compacta"
-            id="recent-entries"
-            aria-live="polite"
-          >
+          <ul class="lista-historial lista-historial--compacta">
             <li class="estado-vacio">Tus registros recientes aparecerán aquí.</li>
           </ul>
         </article>
