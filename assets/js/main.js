@@ -1,6 +1,6 @@
 "use strict";
 
-import { cargarHistorial } from "./ui";
+import { cargarHistorial } from "./ui.js";
 import {
   entradasDiarias,
   definicionesSintomas,
