@@ -12,13 +12,10 @@ Cabe destacar que la información registrada tendrá carácter de seguimiento pe
 
 Las funcionalidades se han dividido en tareas pequeñas, ordenadas según su prioridad de desarrollo. 
 
-### Prioridad alta – Funcionalidades esenciales
+### Prioridad alta - Funcionalidades esenciales
 
 | Funcionalidad | Descripción | Criterio de comprobación |
 |---|---|---|
-| Estructura inicial del proyecto | Crear la estructura de carpetas y archivos HTML, CSS y JavaScript. Configurar los módulos ES6. | El proyecto se ejecuta correctamente y los módulos se importan sin errores. |
-| Configuración de ESLint | Incorporar ESLint para analizar el código JavaScript. | El análisis del proyecto no muestra errores. |
-| Documentación inicial | Crear el README con la descripción, el backlog y el mapa de pantallas. | El README incluye la planificación del proyecto. |
 | Datos de ejemplo | Definir y exportar registros de entradas diarias y síntomas. | Existen al menos 10 registros por entidad y sus relaciones son correctas. |
 | Menú de navegación | Crear un menú con enlaces a todas las secciones principales. | Todos los enlaces permiten acceder a las páginas correspondientes. |
 | Listado de registros diarios | Generar dinámicamente un listado de entradas a partir de los datos de ejemplo. | Las tarjetas se muestran desde JavaScript y no están escritas manualmente en HTML. |
@@ -26,7 +23,7 @@ Las funcionalidades se han dividido en tareas pequeñas, ordenadas según su pri
 | Detalle de una entrada diaria | Mostrar la información completa de un registro al seleccionarlo desde el listado. | Al pulsar una tarjeta se muestra su ficha y los síntomas asociados. |
 | Diseño responsive inicial | Adaptar la estructura principal y la navegación a diferentes tamaños de pantalla. | La aplicación puede consultarse desde escritorio, tablet y móvil. |
 
-### Prioridad media – Gestión de información personal
+### Prioridad media - Gestión de información personal
 
 | Funcionalidad | Descripción | Criterio de comprobación |
 |---|---|---|
@@ -42,7 +39,7 @@ Las funcionalidades se han dividido en tareas pequeñas, ordenadas según su pri
 | Historial y filtros | Incorporar filtros por fecha y síntoma en el historial. | El listado muestra únicamente los registros que cumplen los filtros. |
 | Calendario de seguimiento | Mostrar las entradas diarias en una vista de calendario. | Se pueden identificar los días que contienen registros. |
 
-### Prioridad baja – Análisis y funcionalidades complementarias
+### Prioridad baja - Análisis y funcionalidades complementarias
 
 | Funcionalidad | Descripción | Criterio de comprobación |
 |---|---|---|
