@@ -1136,17 +1136,42 @@
     min-inline-size: 0;
     padding-block: var(--space-2);
   }
-  .seccion-introduccion__imagen {
-    display: block;
+  .seccion-introduccion__cabecera .seccion-introduccion__icono {
+    display: grid;
     grid-column: 1;
     grid-row: 1 / 3;
+    place-items: center;
+
     inline-size: clamp(3rem, 5vw, 3.65rem);
     block-size: clamp(3rem, 5vw, 3.65rem);
-    padding: 0.75rem;
+
     border: 1px solid var(--border-card-featured);
     border-radius: var(--radius-md);
     background: var(--surface-card-soft);
-    object-fit: contain;
+
+    color: var(--action-primary);
+  }
+
+  .seccion-introduccion__icono--calendario::before {
+    content: "";
+    display: block;
+
+    inline-size: 1.6rem;
+    block-size: 1.6rem;
+
+    background-color: currentColor;
+
+    -webkit-mask-image: url("../icons/calendario.svg");
+    mask-image: url("../icons/calendario.svg");
+
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+
+    -webkit-mask-position: center;
+    mask-position: center;
+
+    -webkit-mask-size: contain;
+    mask-size: contain;
   }
   .seccion-introduccion__cabecera .seccion-introduccion__titulo {
     grid-column: 2;
@@ -1170,11 +1195,6 @@
     list-style: none;
   }
 
-  /*
-   * La clase .tarjeta-entrada también se utiliza en el resumen
-   * de la página principal. Por eso, estos estilos quedan
-   * limitados al listado del historial.
-   */
   .historial__listado > .tarjeta-entrada {
     position: relative;
     display: grid;
@@ -1195,8 +1215,6 @@
       box-shadow var(--duration-fast),
       transform var(--duration-fast);
   }
-
-  /* Cabecera de cada registro */
 
   .historial__listado .tarjeta-entrada__cabecera {
     display: flex;
@@ -1231,8 +1249,6 @@
     line-height: 1.3;
   }
 
-  /* Métricas: sueño, energía y estrés */
-
   .historial__listado .tarjeta-entrada__lista {
     display: grid;
     grid-column: 1 / -1;
@@ -1256,13 +1272,62 @@
     border-radius: var(--radius-md);
     background: var(--surface-empty);
   }
+
+  .historial__listado .tarjeta-entrada__flecha {
+    display: block;
+    flex: 0 0 auto;
+    inline-size: 1rem;
+    block-size: 1rem;
+
+    background-color: currentColor;
+
+    -webkit-mask-image: url("../icons/flecha-fina.svg");
+    mask-image: url("../icons/flecha-fina.svg");
+
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+
+    -webkit-mask-position: center;
+    mask-position: center;
+
+    -webkit-mask-size: contain;
+    mask-size: contain;
+  }
+
   .historial__listado .tarjeta-entrada__icono {
     display: block;
     grid-column: 1;
     grid-row: 1 / 3;
     inline-size: 1.2rem;
     block-size: 1.2rem;
-    object-fit: contain;
+
+    background-color: currentColor;
+
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+
+    -webkit-mask-position: center;
+    mask-position: center;
+
+    -webkit-mask-size: contain;
+    mask-size: contain;
+  }
+  .tarjeta-entrada__icono--sueno {
+    color: var(--action-primary);
+    -webkit-mask-image: url("../icons/cama.svg");
+    mask-image: url("../icons/cama.svg");
+  }
+
+  .tarjeta-entrada__icono--energia {
+    color: var(--status-warning);
+    -webkit-mask-image: url("../icons/rayo.svg");
+    mask-image: url("../icons/rayo.svg");
+  }
+
+  .tarjeta-entrada__icono--estres {
+    color: var(--accent-text);
+    -webkit-mask-image: url("../icons/sonrisa.svg");
+    mask-image: url("../icons/sonrisa.svg");
   }
   .historial__listado .tarjeta-entrada__metrica .tarjeta-entrada__titulo {
     grid-column: 2;
@@ -1285,8 +1350,6 @@
     line-height: 1.3;
   }
 
-  /* Acción ver detalles */
-
   .historial__listado .tarjeta-entrada__boton {
     display: inline-flex;
     grid-column: 2;
@@ -1308,15 +1371,7 @@
     cursor: pointer;
     transition:
       transform var(--duration-fast),
-      box-shadow var(--duration-fast),
-      background var(--duration-fast);
-  }
-  .historial__listado .tarjeta-entrada__flecha {
-    display: block;
-    flex: 0 0 auto;
-    inline-size: 1rem;
-    block-size: 1rem;
-    object-fit: contain;
+      box-shadow var(--duration-fast);
   }
 
   .panel-historial {
