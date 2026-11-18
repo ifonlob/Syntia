@@ -7,19 +7,20 @@ export const cargarHistorial = (
 ) => {
   const contenedorPrincipal = document.querySelector(".contenido-seccion");
   const cabecera = document.createElement("header");
-  const imagenCalendario = document.createElement("img");
+  const imagenCalendario = document.createElement("span");
   const titulo = document.createElement("h2");
   const subtitulo = document.createElement("p");
 
   cabecera.classList.add("seccion-introduccion__cabecera");
   titulo.classList.add("seccion-introduccion__titulo");
-  imagenCalendario.classList.add("seccion-introduccion__imagen");
+  imagenCalendario.classList.add(
+    "seccion-introduccion__icono",
+    "seccion-introduccion__icono--calendario"
+  );
   subtitulo.classList.add("seccion-introduccion__subtitulo");
 
   titulo.textContent = "Historial de registros";
   subtitulo.textContent = "Consulta tus registros de salud y bienestar";
-  imagenCalendario.src = "./assets/icons/calendario.svg";
-  imagenCalendario.alt = "Icono Calendario";
 
   cabecera.append(imagenCalendario);
   cabecera.append(titulo);
@@ -128,14 +129,13 @@ export const cargarHistorial = (
     listaDatos.append(filaEstres);
 
     const botonDetalles = document.createElement("button");
-    const imagenBotonDetalles = document.createElement("img");
+    const imagenBotonDetalles = document.createElement("span");
 
     botonDetalles.textContent = "Ver detalles";
     botonDetalles.classList.add("tarjeta-entrada__boton");
     botonDetalles.type = "button";
 
     imagenBotonDetalles.classList.add("tarjeta-entrada__flecha");
-    imagenBotonDetalles.src = "./assets/icons/flecha-fina.svg";
 
     botonDetalles.append(imagenBotonDetalles);
 
