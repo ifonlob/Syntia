@@ -51,9 +51,9 @@ export const cargarHistorial = (
     const filaEnergia = document.createElement("li");
     const filaEstres = document.createElement("li");
 
-    const filaSuenoImagen = document.createElement("img");
-    const filaEnergiaImagen = document.createElement("img");
-    const filaEstresImagen = document.createElement("img");
+    const filaSuenoImagen = document.createElement("span");
+    const filaEnergiaImagen = document.createElement("span");
+    const filaEstresImagen = document.createElement("span");
 
     const tituloSueno = document.createElement("span");
     const tituloEnergia = document.createElement("span");
@@ -67,9 +67,20 @@ export const cargarHistorial = (
     filaEnergia.classList.add("tarjeta-entrada__metrica");
     filaEstres.classList.add("tarjeta-entrada__metrica");
 
-    filaSuenoImagen.classList.add("tarjeta-entrada__icono");
-    filaEnergiaImagen.classList.add("tarjeta-entrada__icono");
-    filaEstresImagen.classList.add("tarjeta-entrada__icono");
+    filaSuenoImagen.classList.add(
+      "tarjeta-entrada__icono",
+      "tarjeta-entrada__icono--sueno"
+    );
+
+    filaEnergiaImagen.classList.add(
+      "tarjeta-entrada__icono",
+      "tarjeta-entrada__icono--energia"
+    );
+
+    filaEstresImagen.classList.add(
+      "tarjeta-entrada__icono",
+      "tarjeta-entrada__icono--estres"
+    );
 
     tituloSueno.classList.add("tarjeta-entrada__titulo");
     tituloEnergia.classList.add("tarjeta-entrada__titulo");
@@ -87,10 +98,6 @@ export const cargarHistorial = (
       "tarjeta-entrada__valor",
       "tarjeta-entrada__estres"
     );
-
-    filaSuenoImagen.src = "./assets/icons/cama.svg";
-    filaEnergiaImagen.src = "./assets/icons/rayo.svg";
-    filaEstresImagen.src = "./assets/icons/sonrisa.svg";
 
     fechaTarjeta.textContent = entrada.fecha;
 
