@@ -1543,6 +1543,245 @@
     line-height: 1.6;
   }
 
+  /* ==========================================
+     MODAL DE DETALLES DEL HISTORIAL
+  ========================================== */
+
+  .dialogo-detalles {
+    inline-size: min(52rem, calc(100% - 2rem));
+    max-block-size: min(88dvh, 56rem);
+    margin: auto;
+    padding: clamp(1.25rem, 3vw, 2rem);
+    overflow: auto;
+    overscroll-behavior: contain;
+    border: 1px solid var(--border-card-featured);
+    border-radius: var(--radius-xl);
+    background: var(--surface-card);
+    color: var(--text-primary);
+    box-shadow: 0 1.5rem 5rem rgb(18 61 64 / 28%);
+  }
+
+  .dialogo-detalles::backdrop {
+    background: rgb(9 24 27 / 58%);
+    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(3px);
+  }
+
+  .dialogo-detalles__cabecera {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding-block-end: var(--space-4);
+    border-block-end: 1px solid var(--border-subtle);
+  }
+
+  .dialogo-detalles__identificacion {
+    display: grid;
+    gap: var(--space-2);
+    min-inline-size: 0;
+  }
+
+  .dialogo-detalles__etiqueta {
+    color: var(--accent-text);
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+  }
+
+  .dialogo-detalles__titulo {
+    color: var(--text-primary);
+    font-size: clamp(1.45rem, 3vw, 2rem);
+    font-weight: 700;
+    letter-spacing: -0.055em;
+    line-height: 1.1;
+  }
+
+  .dialogo-detalles__fecha {
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .dialogo-detalles__cerrar {
+    display: grid;
+    flex: 0 0 auto;
+    inline-size: 2.75rem;
+    block-size: 2.75rem;
+    place-items: center;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-pill);
+    background: var(--surface-card-soft);
+    color: var(--text-primary);
+    font-size: 1.65rem;
+    line-height: 1;
+    cursor: pointer;
+    transition:
+      background var(--duration-fast),
+      border-color var(--duration-fast),
+      transform var(--duration-fast);
+  }
+
+  .dialogo-detalles__contenido {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-4);
+    min-inline-size: 0;
+    padding-block-start: var(--space-5);
+  }
+
+  .dialogo-detalles__seccion {
+    display: grid;
+    align-content: start;
+    gap: var(--space-3);
+    min-inline-size: 0;
+    padding: var(--space-4);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    background: var(--surface-empty);
+  }
+
+  .dialogo-detalles__seccion--resumen,
+  .dialogo-detalles__seccion--nota {
+    grid-column: 1 / -1;
+  }
+
+  .dialogo-detalles__seccion-cabecera {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+  }
+
+  .dialogo-detalles__subtitulo {
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-weight: 680;
+    letter-spacing: -0.025em;
+  }
+
+  .dialogo-detalles__metricas {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-3);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .dialogo-detalles__metrica {
+    min-inline-size: 0;
+    padding: var(--space-3);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    background: var(--surface-card);
+  }
+
+  .dialogo-detalles__dato {
+    display: grid;
+    gap: var(--space-2);
+    min-inline-size: 0;
+  }
+
+  .dialogo-detalles__termino {
+    color: var(--text-secondary);
+    font-size: 0.78rem;
+    font-weight: 600;
+  }
+
+  .dialogo-detalles__valor {
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    font-size: clamp(1.05rem, 2vw, 1.45rem);
+    font-weight: 720;
+    font-variant-numeric: tabular-nums;
+    overflow-wrap: anywhere;
+  }
+
+  .dialogo-detalles__lista {
+    display: grid;
+    gap: var(--space-2);
+    min-inline-size: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .dialogo-detalles__lista > li {
+    display: grid;
+    gap: var(--space-2);
+    min-inline-size: 0;
+    padding: var(--space-3);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    background: var(--surface-card);
+  }
+
+  .dialogo-detalles__vacio {
+    padding: var(--space-3);
+    border: 1px dashed var(--border-subtle);
+    border-radius: var(--radius-md);
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    line-height: 1.5;
+  }
+
+  .dialogo-detalles__nota {
+    min-block-size: 3rem;
+    padding: var(--space-3);
+    border-inline-start: 3px solid var(--border-accent);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    background: var(--surface-card);
+    color: var(--text-secondary);
+    line-height: 1.65;
+    overflow-wrap: anywhere;
+    white-space: pre-wrap;
+  }
+
+  @media (hover: hover) {
+    .dialogo-detalles__cerrar:hover {
+      border-color: var(--border-card-featured);
+      background: var(--surface-card-strong);
+      transform: rotate(4deg);
+    }
+  }
+
+  @media (max-width: 44rem) {
+    .dialogo-detalles {
+      inline-size: calc(100% - 1rem);
+      max-block-size: 94dvh;
+      padding: var(--space-4);
+      border-radius: var(--radius-lg);
+    }
+
+    .dialogo-detalles__contenido {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-3);
+      padding-block-start: var(--space-4);
+    }
+
+    .dialogo-detalles__seccion--resumen,
+    .dialogo-detalles__seccion--nota {
+      grid-column: 1;
+    }
+
+    .dialogo-detalles__metricas {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-2);
+    }
+
+    .dialogo-detalles__dato {
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+    }
+
+    .dialogo-detalles__valor {
+      text-align: end;
+    }
+  }
+
   .boton:active,
   .navegacion__enlace:active {
     transform: translateY(0.12rem) scale(0.98);
