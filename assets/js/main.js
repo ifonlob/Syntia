@@ -18,7 +18,9 @@ const cargarSeccion = (seccionActual) => {
       cargarHistorial(
         entradasDiarias,
         definicionesSintomas,
-        aparicionesSintomas
+        aparicionesSintomas,
+        medicamentos,
+        tomasMedicacion
       );
       break;
     case "nuevo-registro":
