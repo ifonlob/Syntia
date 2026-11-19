@@ -49,13 +49,47 @@ const cargarSintomas = (
   });
 };
 
-export const cargarHistorial = (
-  entradasDiarias,
-  definicionesSintomas,
-  aparicionesSintomas,
+const cargarMedicacion = (
+  entrada,
   medicamentos,
-  tomasMedicacion
+  tomasMedicacion,
+  contenedorMedicacion
 ) => {
+  const tomasEntrada = tomasMedicacion.filter(
+    (toma) => toma.entradaId === entrada.id
+  );
+
+  if (tomasEntrada.length === 0) {
+    const mensaje = document.createElement("li");
+
+    mensaje.textContent = "No se registraron tomas este día.";
+
+    contenedorMedicacion.append(mensaje);
+    return;
+  }
+
+  tomasEntrada.forEach((toma) => {
+    const elemento = document.createElement("li");
+
+    const medicamento = medicamentos.find(
+      (medicamento) => medicamento.id === toma.medicamentoId
+    );
+
+    const nombreMedicamento = medicamento
+      ? medicamento.nombre
+      : toma.nombreMedicamentoRegistrado;
+
+    elemento.textContent = `${nombreMedicamento} — Dosis: ${toma.dosisTexto} — Hora: ${toma.hora} — Estado: ${toma.estado}`;
+
+    if (toma.nota) {
+      elemento.textContent += ` — ${toma.nota}`;
+    }
+
+    contenedorMedicacion.append(elemento);
+  });
+};
+
+export const cargarHistorial = (entradasDiarias) => {
   const contenedorPrincipal = document.querySelector(".contenido-seccion");
   const cabecera = document.createElement("header");
   const imagenCalendario = document.createElement("span");
@@ -200,10 +234,6 @@ export const cargarHistorial = (
 
   historialListado.addEventListener("click", (evento) => {
     const boton = evento.target.closest(".tarjeta-entrada__boton");
-
-    if (!boton) {
-      return;
-    }
 
     const tarjeta = boton.closest(".tarjeta-entrada");
     const entradaId = tarjeta.dataset.entradaId;
