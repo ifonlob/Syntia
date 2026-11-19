@@ -297,5 +297,73 @@
         <span class="pie-pagina__marca">HECHO PARA ACOMPAÑARTE · 2026</span>
       </footer>
     </main>
+    <dialog class="dialogo-detalles" id="dialogo-detalles">
+      <header class="dialogo-detalles__cabecera">
+        <section class="dialogo-detalles__identificacion">
+          <h2 class="dialogo-detalles__titulo" id="dialogo-detalles-titulo">
+            Detalles del registro
+          </h2>
+          <time class="dialogo-detalles__fecha" id="fecha-detalle"></time>
+        </section>
+        <button class="dialogo-detalles__cerrar" id="cerrar-dialogo-detalles" type="button">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </header>
+
+      <section class="dialogo-detalles__contenido" id="contenido-detalles">
+        <section class="dialogo-detalles__seccion dialogo-detalles__seccion--resumen">
+          <header class="dialogo-detalles__seccion-cabecera">
+            <h3 class="dialogo-detalles__subtitulo" id="titulo-resumen-detalles">
+              Resumen del día
+            </h3>
+          </header>
+          <ul class="dialogo-detalles__metricas">
+            <li class="dialogo-detalles__metrica">
+              <dl class="dialogo-detalles__dato">
+                <dt class="dialogo-detalles__termino">Sueño</dt>
+                <dd class="dialogo-detalles__valor" id="detalle-horas-sueno"></dd>
+              </dl>
+            </li>
+            <li class="dialogo-detalles__metrica">
+              <dl class="dialogo-detalles__dato">
+                <dt class="dialogo-detalles__termino">Energía</dt>
+                <dd class="dialogo-detalles__valor" id="detalle-nivel-energia"></dd>
+              </dl>
+            </li>
+            <li class="dialogo-detalles__metrica">
+              <dl class="dialogo-detalles__dato">
+                <dt class="dialogo-detalles__termino">Estrés</dt>
+                <dd class="dialogo-detalles__valor" id="detalle-nivel-estres"></dd>
+              </dl>
+            </li>
+          </ul>
+        </section>
+
+        <section class="dialogo-detalles__seccion">
+          <header class="dialogo-detalles__seccion-cabecera">
+            <h3 class="dialogo-detalles__subtitulo" id="titulo-sintomas-detalles">
+              Síntomas registrados
+            </h3>
+          </header>
+          <ul class="dialogo-detalles__lista" id="lista-sintomas-detalle"></ul>
+        </section>
+
+        <section class="dialogo-detalles__seccion">
+          <header class="dialogo-detalles__seccion-cabecera">
+            <h3 class="dialogo-detalles__subtitulo" id="titulo-medicacion-detalles">
+              Medicación tomada
+            </h3>
+          </header>
+          <ul class="dialogo-detalles__lista" id="lista-medicacion-detalle"></ul>
+        </section>
+
+        <section class="dialogo-detalles__seccion dialogo-detalles__seccion--nota">
+          <header class="dialogo-detalles__seccion-cabecera">
+            <h3 class="dialogo-detalles__subtitulo" id="titulo-nota-detalles">Nota personal</h3>
+          </header>
+          <p class="dialogo-detalles__nota" id="nota-personal-detalle"></p>
+        </section>
+      </section>
+    </dialog>
   </body>
 </html>
