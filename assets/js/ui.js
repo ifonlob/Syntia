@@ -1,9 +1,12 @@
 "use strict";
+const mostrarDetalles = (entrada) => {};
 
 export const cargarHistorial = (
   entradasDiarias,
   definicionesSintomas,
-  aparicionesSintomas
+  aparicionesSintomas,
+  medicamentos,
+  tomasMedicacion
 ) => {
   const contenedorPrincipal = document.querySelector(".contenido-seccion");
   const cabecera = document.createElement("header");
@@ -32,6 +35,13 @@ export const cargarHistorial = (
   contenedorPrincipal.append(cabecera);
   contenedorPrincipal.append(historialListado);
 
+  const modal = document.querySelector("#dialogo-detalles");
+  const contenedorSintomas = document.querySelector(
+    "#titulo-sintomas-detalles"
+  );
+  const contenedorMedicacion = document.querySelector("");
+  const botonCerrado = document.querySelector("#cerrar-dialogo-detalles");
+
   entradasDiarias.forEach((entrada) => {
     const tarjeta = document.createElement("article");
     const cabeceraTarjeta = document.createElement("header");
@@ -40,6 +50,7 @@ export const cargarHistorial = (
     const listaDatos = document.createElement("ul");
 
     tarjeta.classList.add("tarjeta-entrada");
+    tarjeta.dataset.entradaId = entrada.id;
     cabeceraTarjeta.classList.add("tarjeta-entrada__cabecera");
     fechaTarjeta.classList.add("tarjeta-entrada__fecha");
     tituloTarjeta.classList.add("tarjeta-entrada__titulo");
@@ -144,5 +155,22 @@ export const cargarHistorial = (
     tarjeta.append(botonDetalles);
 
     historialListado.append(tarjeta);
+  });
+
+  historialListado.addEventListener("click", (evento) => {
+    const boton = evento.target.closest(".tarjeta-entrada__boton");
+
+    if (!boton) {
+      return;
+    }
+
+    const tarjeta = boton.closest(".tarjeta-entrada");
+    const entradaId = tarjeta.dataset.entradaId;
+
+    const entradaSeleccionada = entradasDiarias.find(
+      (entrada) => entrada.id === entradaId
+    );
+
+    mostrarDetalles(entradaSeleccionada);
   });
 };
