@@ -1,5 +1,53 @@
 "use strict";
-const mostrarDetalles = (entrada) => {};
+const mostrarDetalles = (entrada) => {
+  const modal = document.querySelector("#dialogo-detalles");
+  const contenedorSintomas = document.querySelector("#lista-sintomas-detalle");
+  const contenedorMedicacion = document.querySelector(
+    "#lista-medicacion-detalle"
+  );
+  const botonCerrado = document.querySelector("#cerrar-dialogo-detalles");
+
+  contenedorSintomas.replaceChildren();
+  contenedorMedicacion.replaceChildren();
+};
+
+const cargarSintomas = (
+  entrada,
+  definicionesSintomas,
+  aparicionesSintomas,
+  contenedorSintomas
+) => {
+  const sintomasEntrada = aparicionesSintomas.filter(
+    (aparicion) => aparicion.entradaId === entrada.id
+  );
+
+  if (sintomasEntrada.length === 0) {
+    const mensaje = document.createElement("li");
+
+    mensaje.textContent = "No se registraron síntomas este día.";
+
+    contenedorSintomas.append(mensaje);
+    return;
+  }
+
+  sintomasEntrada.forEach((aparicion) => {
+    const elemento = document.createElement("li");
+
+    const sintoma = definicionesSintomas.find(
+      (definicion) => definicion.id === aparicion.definicionSintomaId
+    );
+
+    const nombreSintoma = sintoma ? sintoma.nombre : aparicion.nombreRegistrado;
+
+    elemento.textContent = `${nombreSintoma} — Intensidad: ${aparicion.intensidad}`;
+
+    if (aparicion.nota) {
+      elemento.textContent += ` — ${aparicion.nota}`;
+    }
+
+    contenedorSintomas.append(elemento);
+  });
+};
 
 export const cargarHistorial = (
   entradasDiarias,
@@ -34,13 +82,6 @@ export const cargarHistorial = (
 
   contenedorPrincipal.append(cabecera);
   contenedorPrincipal.append(historialListado);
-
-  const modal = document.querySelector("#dialogo-detalles");
-  const contenedorSintomas = document.querySelector(
-    "#titulo-sintomas-detalles"
-  );
-  const contenedorMedicacion = document.querySelector("");
-  const botonCerrado = document.querySelector("#cerrar-dialogo-detalles");
 
   entradasDiarias.forEach((entrada) => {
     const tarjeta = document.createElement("article");
