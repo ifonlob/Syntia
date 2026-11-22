@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <meta
+      name="description"
+      content="Crea tu perfil en Syntia y comienza a registrar tu bienestar a tu ritmo."
+    />
+    <title>Crear cuenta · Syntia</title>
+    <link rel="stylesheet" href="./assets/css/styles.css" />
+    <script type="module" src="./assets/js/main.js" defer></script>
+  </head>
+  <body class="pagina-registro" data-page="registro">
+    <a class="utilidad-saltar" href="#main-content">Saltar al formulario de registro</a>
+
+    <main class="registro" id="main-content">
+      <header class="registro__cabecera">
+        <a class="registro__marca" href="index.html" aria-label="Syntia, ir al inicio">
+          <svg
+            class="registro__simbolo"
+            aria-hidden="true"
+            width="42"
+            height="42"
+            viewBox="0 0 48 48"
+            fill="none"
+          >
+            <path
+              d="M23.7 41.2C10.9 38.4 5.8 28.8 8.2 14.1c11.6 1.1 19.3 8.5 18.4 20.1C31 20.6 36.9 11.6 44 7.8c1.1 17.3-6.4 29.5-20.3 33.4Z"
+              fill="currentColor"
+            />
+            <path
+              d="M11 14.5c7 7 12.2 14.2 14.5 25.8"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linecap="round"
+            />
+          </svg>
+          <span class="registro__marca-texto">
+            <span class="registro__marca-nombre">Syntia</span>
+            <span class="registro__marca-descriptor">SALUD · A TU RITMO</span>
+          </span>
+        </a>
+
+        <p class="registro__acceso-existente">
+          ¿Ya tienes una cuenta?
+          <a class="enlace-texto" href="login.html"
+            >Inicia sesión <span aria-hidden="true">↗</span></a
+          >
+        </p>
+      </header>
+
+      <section class="registro__contenido" aria-labelledby="titulo-registro">
+        <article class="registro__introduccion">
+          <h1 class="registro__titulo" id="titulo-registro">
+            Empieza a escucharte <span>sin prisas.</span>
+          </h1>
+          <p class="registro__descripcion">
+            Crea tu perfil en Syntia y comienza a reunir, poco a poco, información sobre cómo te
+            encuentras. Cada día cuenta, también los que son diferentes.
+          </p>
+        </article>
+
+        <article class="registro__tarjeta">
+          <header class="registro__tarjeta-cabecera">
+            <h2 class="registro__titulo-formulario" id="titulo-formulario-registro">
+              Crear tu cuenta
+            </h2>
+            <p class="registro__texto-formulario">
+              Completa tus datos para preparar tu espacio personal.
+            </p>
+          </header>
+
+          <form class="formulario-registro" id="formulario-registro" method="post" novalidate>
+            <input type="hidden" id="usuario-id" name="usuarioId" value="" />
+
+            <fieldset class="formulario-registro__grupo">
+              <legend class="formulario-registro__leyenda">Datos de acceso</legend>
+
+              <section class="campo-registro">
+                <label class="campo-registro__etiqueta" for="nombre-usuario">
+                  Nombre de usuario
+                </label>
+                <input
+                  class="campo-registro__control"
+                  id="nombre-usuario"
+                  name="nombreUsuario"
+                  type="text"
+                  autocomplete="username"
+                  maxlength="40"
+                  required
+                  aria-invalid="false"
+                  aria-describedby="ayuda-nombre-usuario error-nombre-usuario"
+                />
+                <p class="campo-registro__ayuda" id="ayuda-nombre-usuario">
+                  Es el nombre que aparecerá en tu perfil.
+                </p>
+                <p class="campo-registro__error" id="error-nombre-usuario" aria-live="polite"></p>
+              </section>
+
+              <section class="campo-registro">
+                <label class="campo-registro__etiqueta" for="correo"> Correo electrónico </label>
+                <input
+                  class="campo-registro__control"
+                  id="correo"
+                  name="email"
+                  type="email"
+                  autocomplete="email"
+                  inputmode="email"
+                  maxlength="254"
+                  required
+                  aria-invalid="false"
+                  aria-describedby="error-correo"
+                />
+                <p class="campo-registro__error" id="error-correo" aria-live="polite"></p>
+              </section>
+            </fieldset>
+
+            <fieldset class="formulario-registro__grupo" id="grupo-seguridad">
+              <legend class="formulario-registro__leyenda">Seguridad</legend>
+
+              <section class="campo-registro">
+                <label class="campo-registro__etiqueta" for="password"> Contraseña </label>
+                <input
+                  class="campo-registro__control"
+                  id="password"
+                  name="password"
+                  type="password"
+                  autocomplete="new-password"
+                  minlength="8"
+                  required
+                  aria-invalid="false"
+                  aria-describedby="ayuda-password error-password"
+                />
+                <p class="campo-registro__ayuda" id="ayuda-password">
+                  Mínimo 8 caracteres, una mayúscula y un número.
+                </p>
+                <p class="campo-registro__error" id="error-password" aria-live="polite"></p>
+              </section>
+
+              <section class="campo-registro">
+                <label class="campo-registro__etiqueta" for="confirmacion-password">
+                  Repetir contraseña
+                </label>
+                <input
+                  class="campo-registro__control"
+                  id="confirmacion-password"
+                  name="confirmacionPassword"
+                  type="password"
+                  autocomplete="new-password"
+                  minlength="8"
+                  required
+                  aria-invalid="false"
+                  aria-describedby="error-confirmacion-password"
+                />
+                <p
+                  class="campo-registro__error"
+                  id="error-confirmacion-password"
+                  aria-live="polite"
+                ></p>
+              </section>
+            </fieldset>
+
+            <fieldset class="formulario-registro__grupo formulario-registro__grupo--personal">
+              <legend class="formulario-registro__leyenda">Un poco más sobre ti</legend>
+
+              <section class="campo-registro">
+                <label class="campo-registro__etiqueta" for="fecha-nacimiento">
+                  Fecha de nacimiento
+                </label>
+                <input
+                  class="campo-registro__control"
+                  id="fecha-nacimiento"
+                  name="fechaNacimiento"
+                  type="date"
+                  autocomplete="bday"
+                  required
+                  aria-invalid="false"
+                  aria-describedby="ayuda-fecha-nacimiento error-fecha-nacimiento"
+                />
+                <p class="campo-registro__ayuda" id="ayuda-fecha-nacimiento">
+                  Debes tener al menos 16 años para crear un perfil.
+                </p>
+                <p class="campo-registro__error" id="error-fecha-nacimiento" aria-live="polite"></p>
+              </section>
+
+              <section class="campo-registro campo-registro--condiciones">
+                <input
+                  class="campo-registro__casilla"
+                  id="acepta-condiciones"
+                  name="aceptaCondiciones"
+                  type="checkbox"
+                  value="true"
+                  required
+                  aria-invalid="false"
+                  aria-describedby="error-condiciones"
+                />
+                <label class="campo-registro__texto-condiciones" for="acepta-condiciones">
+                  He leído y acepto las condiciones de uso y la política de privacidad de Syntia.
+                </label>
+                <p
+                  class="campo-registro__error campo-registro__error--condiciones"
+                  id="error-condiciones"
+                ></p>
+              </section>
+            </fieldset>
+
+            <button
+              class="boton boton--principal formulario-registro__enviar"
+              id="boton-enviar-registro"
+              type="submit"
+            >
+              Crear mi cuenta <span aria-hidden="true">↗</span>
+            </button>
+
+            <p class="formulario-registro__privacidad">
+              En este prototipo, la contraseña se utiliza para validar el formulario, pero no se
+              guarda en el perfil.
+            </p>
+            <p class="formulario-registro__estado" id="estado-registro" role="status"></p>
+          </form>
+        </article>
+      </section>
+
+      <footer class="registro__pie">
+        <p>
+          Syntia es una herramienta de seguimiento personal. No sustituye el consejo de
+          profesionales sanitarios.
+        </p>
+        <span>HECHO PARA ACOMPAÑARTE · 2026</span>
+      </footer>
+    </main>
+  </body>
+</html>
