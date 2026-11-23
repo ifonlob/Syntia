@@ -3,11 +3,9 @@
 import { cargarHistorial } from "./ui.js";
 import { obtenerTodos } from "./almacen.js";
 import { inicializarDatos } from "./inicializarDatos.js";
+import { inicializarFormularioRegistro } from "./registro.js";
 
-inicializarDatos();
-
-const parametros = new URLSearchParams(window.location.search);
-const seccionActual = parametros.get("seccion");
+const paginaActual = document.body.dataset.page;
 
 const cargarSeccion = (seccionActual) => {
   switch (seccionActual) {
@@ -17,6 +15,7 @@ const cargarSeccion = (seccionActual) => {
       const aparicionesSintomas = obtenerTodos("aparicionesSintomas");
       const medicamentos = obtenerTodos("medicamentos");
       const tomasMedicacion = obtenerTodos("tomasMedicacion");
+
       cargarHistorial(
         entradasDiarias,
         definicionesSintomas,
@@ -26,21 +25,49 @@ const cargarSeccion = (seccionActual) => {
       );
       break;
     }
+
     case "nuevo-registro": {
+      break;
     }
+
     case "sintomas": {
+      break;
     }
+
     case "medicacion": {
+      break;
     }
+
     case "calendario": {
+      break;
     }
+
     case "evolucion": {
+      break;
     }
+
     case "informes": {
+      break;
     }
+
     case "preferencias": {
+      break;
     }
   }
 };
 
-cargarSeccion(seccionActual);
+switch (paginaActual) {
+  case "registro":
+    inicializarFormularioRegistro();
+    break;
+
+  case "seccion": {
+    inicializarDatos();
+
+    const parametros = new URLSearchParams(window.location.search);
+    const seccionActual = parametros.get("seccion");
+
+    cargarSeccion(seccionActual);
+    break;
+  }
+}
