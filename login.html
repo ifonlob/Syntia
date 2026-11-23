@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <meta
+      name="description"
+      content="Inicia sesión en Syntia para acceder a tu espacio personal de seguimiento."
+    />
+    <title>Iniciar sesión · Syntia</title>
+    <link rel="stylesheet" href="./assets/css/styles.css" />
+    <script type="module" src="./assets/js/main.js"></script>
+  </head>
+  <body class="pagina-login" data-page="login">
+    <a class="utilidad-saltar" href="#contenido-login">Saltar al contenido principal</a>
+
+    <main class="login" id="contenido-login">
+      <header class="login__cabecera">
+        <a class="login__marca" href="index.html" aria-label="Syntia, ir al inicio">
+          <svg
+            class="login__simbolo"
+            aria-hidden="true"
+            width="42"
+            height="42"
+            viewBox="0 0 48 48"
+            fill="none"
+          >
+            <path
+              d="M23.7 41.2C10.9 38.4 5.8 28.8 8.2 14.1c11.6 1.1 19.3 8.5 18.4 20.1C31 20.6 36.9 11.6 44 7.8c1.1 17.3-6.4 29.5-20.3 33.4Z"
+              fill="currentColor"
+            />
+            <path
+              d="M11 14.5c7 7 12.2 14.2 14.5 25.8"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linecap="round"
+            />
+          </svg>
+          <span class="login__marca-texto">
+            <span class="login__marca-nombre">Syntia</span>
+            <span class="login__marca-descriptor">SALUD · A TU RITMO</span>
+          </span>
+        </a>
+
+        <p class="login__registro">
+          ¿Todavía no tienes cuenta?
+          <a class="enlace-texto" href="registro.html">
+            Crear una cuenta <span aria-hidden="true">↗</span>
+          </a>
+        </p>
+      </header>
+
+      <section class="login__contenido" aria-labelledby="titulo-login">
+        <section class="login__introduccion">
+          <h1 class="login__titulo" id="titulo-login">Qué bueno tenerte <span>de vuelta.</span></h1>
+          <p class="login__descripcion">
+            Accede a tu espacio de seguimiento y continúa observando cómo te encuentras, a tu ritmo
+            y sin exigencias.
+          </p>
+        </section>
+
+        <article class="login__tarjeta" aria-labelledby="titulo-formulario-login">
+          <header class="login__tarjeta-cabecera">
+            <h2 class="login__titulo-formulario" id="titulo-formulario-login">Iniciar sesión</h2>
+            <p class="login__texto-formulario">Introduce los datos de acceso de tu cuenta.</p>
+          </header>
+
+          <form class="formulario-login" id="formulario-login" method="post" novalidate>
+            <fieldset class="formulario-login__grupo">
+              <legend class="formulario-login__leyenda">Datos de acceso</legend>
+
+              <section class="campo-login">
+                <label class="campo-login__etiqueta" for="correo-login"> Correo electrónico </label>
+                <input
+                  class="campo-login__control"
+                  id="correo-login"
+                  name="email"
+                  type="email"
+                  autocomplete="username"
+                  inputmode="email"
+                  autocapitalize="none"
+                  spellcheck="false"
+                  maxlength="254"
+                  required
+                  aria-invalid="false"
+                  aria-describedby="error-correo-login"
+                />
+                <p class="campo-login__error" id="error-correo-login"></p>
+              </section>
+
+              <section class="campo-login">
+                <label class="campo-login__etiqueta" for="password-login"> Contraseña </label>
+                <input
+                  class="campo-login__control"
+                  id="password-login"
+                  name="password"
+                  type="password"
+                  autocomplete="current-password"
+                  required
+                  aria-invalid="false"
+                  aria-describedby="ayuda-password-login error-password-login"
+                />
+                <p class="campo-login__ayuda" id="ayuda-password-login">
+                  Introduce la contraseña asociada a tu cuenta.
+                </p>
+                <p class="campo-login__error" id="error-password-login"></p>
+              </section>
+            </fieldset>
+
+            <button
+              class="boton boton--principal formulario-login__enviar"
+              id="boton-enviar-login"
+              type="submit"
+            >
+              Iniciar sesión <span aria-hidden="true">↗</span>
+            </button>
+            </p>
+            <p class="formulario-login__estado" id="estado-login" role="status"></p>
+          </form>
+        </article>
+      </section>
+
+      <footer class="login__pie">
+        <p>
+          Syntia es una herramienta de seguimiento personal. No sustituye el consejo de
+          profesionales sanitarios.
+        </p>
+        <span>HECHO PARA ACOMPAÑARTE · 2026</span>
+      </footer>
+    </main>
+  </body>
+</html>

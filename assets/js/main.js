@@ -11,7 +11,7 @@ const seccionActual = parametros.get("seccion");
 
 const cargarSeccion = (seccionActual) => {
   switch (seccionActual) {
-    case "historial":
+    case "historial": {
       const entradasDiarias = obtenerTodos("entradasDiarias");
       const definicionesSintomas = obtenerTodos("definicionesSintomas");
       const aparicionesSintomas = obtenerTodos("aparicionesSintomas");
@@ -25,20 +25,21 @@ const cargarSeccion = (seccionActual) => {
         tomasMedicacion
       );
       break;
-    case "nuevo-registro":
-      break;
-    case "sintomas":
-      break;
-    case "medicacion":
-      break;
-    case "calendario":
-      break;
-    case "evolucion":
-      break;
-    case "informes":
-      break;
-    case "preferencias":
-      break;
+    }
+    case "nuevo-registro": {
+    }
+    case "sintomas": {
+    }
+    case "medicacion": {
+    }
+    case "calendario": {
+    }
+    case "evolucion": {
+    }
+    case "informes": {
+    }
+    case "preferencias": {
+    }
   }
 };
 

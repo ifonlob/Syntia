@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <meta
+      name="description"
+      content="Contacta con el equipo de Syntia para resolver dudas, comunicar incidencias o compartir sugerencias."
+    />
+    <title>Contacto · Syntia</title>
+    <link rel="stylesheet" href="./assets/css/styles.css" />
+    <script type="module" src="./assets/js/main.js"></script>
+  </head>
+
+  <body class="pagina-contacto" data-page="contacto">
+    <a class="utilidad-saltar" href="#contenido-contacto"> Saltar al formulario de contacto </a>
+
+    <main class="contacto" id="contenido-contacto">
+      <header class="contacto__cabecera">
+        <a class="contacto__marca" href="index.html" aria-label="Syntia, ir al inicio">
+          <svg
+            class="contacto__simbolo"
+            aria-hidden="true"
+            width="42"
+            height="42"
+            viewBox="0 0 48 48"
+            fill="none"
+          >
+            <path
+              d="M23.7 41.2C10.9 38.4 5.8 28.8 8.2 14.1c11.6 1.1 19.3 8.5 18.4 20.1C31 20.6 36.9 11.6 44 7.8c1.1 17.3-6.4 29.5-20.3 33.4Z"
+              fill="currentColor"
+            />
+            <path
+              d="M11 14.5c7 7 12.2 14.2 14.5 25.8"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linecap="round"
+            />
+          </svg>
+
+          <span class="contacto__marca-texto">
+            <span class="contacto__marca-nombre">Syntia</span>
+            <span class="contacto__marca-descriptor">SALUD · A TU RITMO</span>
+          </span>
+        </a>
+
+        <nav class="contacto__enlaces" aria-label="Enlaces de contacto">
+          <a class="enlace-texto" href="seccion.html?seccion=mensajes">
+            Mensajes enviados <span aria-hidden="true">↗</span>
+          </a>
+          <a class="enlace-texto" href="index.html">
+            Volver al inicio <span aria-hidden="true">↗</span>
+          </a>
+        </nav>
+      </header>
+
+      <section class="contacto__contenido" aria-labelledby="titulo-contacto">
+        <section class="contacto__introduccion">
+          <h1 class="contacto__titulo" id="titulo-contacto">
+            Hablemos. <span>Estamos aquí.</span>
+          </h1>
+
+          <p class="contacto__descripcion">
+            ¿Has encontrado un problema, tienes una duda o se te ha ocurrido una mejora?
+            Cuéntanoslo. Tu experiencia nos ayuda a hacer Syntia más útil y cercana.
+          </p>
+        </section>
+
+        <article class="contacto__tarjeta" aria-labelledby="titulo-formulario-contacto">
+          <header class="contacto__tarjeta-cabecera">
+            <h2 class="contacto__titulo-formulario" id="titulo-formulario-contacto">
+              Envíanos un mensaje
+            </h2>
+            <p class="contacto__texto-formulario">
+              Completa los campos para que podamos atender tu consulta.
+            </p>
+          </header>
+
+          <form class="formulario-contacto" id="formulario-contacto" method="post" novalidate>
+            <fieldset class="formulario-contacto__grupo">
+              <legend class="formulario-contacto__leyenda">Tus datos</legend>
+
+              <section class="campo-contacto">
+                <label class="campo-contacto__etiqueta" for="nombre-contacto"> Nombre </label>
+                <input
+                  class="campo-contacto__control"
+                  id="nombre-contacto"
+                  name="nombre"
+                  type="text"
+                  autocomplete="name"
+                  maxlength="80"
+                  required
+                  aria-invalid="false"
+                  aria-describedby="error-nombre-contacto"
+                />
+                <p class="campo-contacto__error" id="error-nombre-contacto" aria-live="polite"></p>
+              </section>
+
+              <section class="campo-contacto">
+                <label class="campo-contacto__etiqueta" for="correo-contacto">
+                  Correo electrónico
+                </label>
+                <input
+                  class="campo-contacto__control"
+                  id="correo-contacto"
+                  name="email"
+                  type="email"
+                  autocomplete="email"
+                  inputmode="email"
+                  autocapitalize="none"
+                  spellcheck="false"
+                  maxlength="254"
+                  required
+                  aria-invalid="false"
+                  aria-describedby="error-correo-contacto"
+                />
+                <p class="campo-contacto__error" id="error-correo-contacto" aria-live="polite"></p>
+              </section>
+
+              <section class="campo-contacto">
+                <label class="campo-contacto__etiqueta" for="telefono-contacto">
+                  Teléfono <span class="campo-contacto__opcional">(opcional)</span>
+                </label>
+                <input
+                  class="campo-contacto__control"
+                  id="telefono-contacto"
+                  name="telefono"
+                  type="tel"
+                  autocomplete="tel"
+                  inputmode="tel"
+                  maxlength="20"
+                  aria-invalid="false"
+                  aria-describedby="ayuda-telefono-contacto error-telefono-contacto"
+                />
+                <p class="campo-contacto__ayuda" id="ayuda-telefono-contacto">
+                  Puedes incluir el prefijo internacional, por ejemplo, +34.
+                </p>
+                <p class="campo-contacto__error" id="error-telefono-contacto"></p>
+              </section>
+
+              <section class="campo-contacto campo-contacto--preferencia">
+                <input
+                  class="campo-contacto__casilla"
+                  id="prefiere-llamada"
+                  name="prefiereLlamada"
+                  type="checkbox"
+                  value="true"
+                  aria-invalid="false"
+                  aria-describedby="ayuda-prefiere-llamada"
+                  aria-controls="telefono-contacto"
+                />
+                <label class="campo-contacto__texto-casilla" for="prefiere-llamada">
+                  Prefiero que me llaméis
+                </label>
+                <p class="campo-contacto__ayuda" id="ayuda-prefiere-llamada">
+                  Al marcar esta opción, el teléfono será obligatorio.
+                </p>
+              </section>
+            </fieldset>
+
+            <fieldset class="formulario-contacto__grupo formulario-contacto__grupo--consulta">
+              <legend class="formulario-contacto__leyenda">Tu consulta</legend>
+
+              <section class="campo-contacto campo-contacto--ancho">
+                <label class="campo-contacto__etiqueta" for="motivo-contacto"> Motivo </label>
+                <select
+                  class="campo-contacto__control"
+                  id="motivo-contacto"
+                  name="motivo"
+                  required
+                  aria-invalid="false"
+                  aria-describedby="error-motivo-contacto"
+                >
+                  <option value="" selected>Selecciona el motivo de tu consulta</option>
+                  <option value="problema-tecnico">Problema técnico</option>
+                  <option value="problema-registro">Problema con un registro</option>
+                  <option value="privacidad-datos">Privacidad y datos</option>
+                  <option value="sugerencia-mejora">Sugerencia de mejora</option>
+                  <option value="otra-consulta">Otra consulta</option>
+                </select>
+                <p class="campo-contacto__error" id="error-motivo-contacto" aria-live="polite"></p>
+              </section>
+
+              <section class="campo-contacto campo-contacto--ancho">
+                <label class="campo-contacto__etiqueta" for="mensaje-contacto"> Mensaje </label>
+                <textarea
+                  class="campo-contacto__control campo-contacto__control--area"
+                  id="mensaje-contacto"
+                  name="mensaje"
+                  rows="6"
+                  minlength="20"
+                  maxlength="1000"
+                  required
+                  aria-invalid="false"
+                  aria-describedby="ayuda-mensaje-contacto contador-mensaje error-mensaje-contacto"
+                ></textarea>
+                <p class="campo-contacto__ayuda" id="ayuda-mensaje-contacto">
+                  Escribe entre 20 y 1000 caracteres.
+                </p>
+                <output
+                  class="campo-contacto__contador"
+                  id="contador-mensaje"
+                  for="mensaje-contacto"
+                  aria-live="off"
+                  >0 / 1000 caracteres</output
+                >
+                <p class="campo-contacto__error" id="error-mensaje-contacto" aria-live="polite"></p>
+              </section>
+            </fieldset>
+
+            <button
+              class="boton boton--principal formulario-contacto__enviar"
+              id="boton-enviar-contacto"
+              type="submit"
+            >
+              Enviar mensaje <span aria-hidden="true">↗</span>
+            </button>
+            <p class="formulario-contacto__estado" id="estado-contacto" role="status"></p>
+          </form>
+
+          <p class="contacto__mensajes">
+            ¿Ya has enviado una consulta?
+            <a class="enlace-texto" href="seccion.html?seccion=mensajes">
+              Consulta tus mensajes enviados <span aria-hidden="true">↗</span>
+            </a>
+          </p>
+        </article>
+      </section>
+
+      <footer class="contacto__pie">
+        <p>
+          Syntia es una herramienta de seguimiento personal. No sustituye el consejo de
+          profesionales sanitarios.
+        </p>
+        <span>HECHO PARA ACOMPAÑARTE · 2026</span>
+      </footer>
+    </main>
+  </body>
+</html>

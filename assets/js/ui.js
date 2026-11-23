@@ -29,7 +29,6 @@ const cargarSintomas = (
     contenedorSintomas.append(mensaje);
     return;
   }
-
   sintomasEntrada.forEach((aparicion) => {
     const elemento = document.createElement("li");
 

@@ -2129,3 +2129,1421 @@
     white-space: nowrap;
   }
 }
+
+
+/* ==========================================
+   REGISTRO DE USUARIOS
+   Vista de creación y edición de perfil
+========================================== */
+
+@layer components {
+  .pagina-registro {
+    min-block-size: 100vh;
+    background:
+      radial-gradient(
+        circle at 12% 16%,
+        var(--surface-card-strong) 0,
+        transparent 28rem
+      ),
+      var(--surface-page);
+  }
+
+  .registro {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: clamp(1.5rem, 3vw, 2.75rem);
+    inline-size: min(76rem, calc(100% - var(--layout-gutter) - var(--layout-gutter)));
+    min-block-size: 100vh;
+    margin-inline: auto;
+    padding-block: clamp(1.25rem, 3vw, 2.5rem) var(--space-5);
+  }
+
+  .registro__cabecera {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding-block-end: var(--space-4);
+    border-block-end: 1px solid var(--border-subtle);
+  }
+
+  .registro__marca {
+    display: inline-grid;
+    grid-template-columns: 2.8rem auto;
+    align-items: center;
+    column-gap: var(--space-2);
+    color: var(--text-primary);
+  }
+
+  .registro__simbolo {
+    grid-row: span 2;
+    inline-size: 2.8rem;
+    block-size: 2.8rem;
+    color: var(--action-primary);
+  }
+
+  .registro__marca-texto {
+    display: grid;
+    gap: 0.1rem;
+  }
+
+  .registro__marca-nombre {
+    font-size: 1.75rem;
+    font-weight: 730;
+    letter-spacing: -0.075em;
+    line-height: 1;
+  }
+
+  .registro__marca-descriptor {
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.12em;
+  }
+
+  .registro__acceso-existente {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--space-2);
+    color: var(--text-secondary);
+    font-size: 0.84rem;
+  }
+
+  .registro__acceso-existente .enlace-texto {
+    min-block-size: 2.5rem;
+    font-size: inherit;
+  }
+
+  .registro__contenido {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    align-items: center;
+    gap: clamp(2rem, 5vw, 5.5rem);
+    inline-size: min(100%, 68rem);
+    margin-inline: auto;
+    padding-block: var(--space-4);
+  }
+
+  .registro__introduccion {
+    display: grid;
+    align-content: center;
+    justify-items: start;
+    gap: var(--space-4);
+    min-inline-size: 0;
+  }
+
+  .registro__ceja,
+  .registro__paso {
+    color: var(--accent-text);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+  }
+
+  .registro__titulo {
+    max-inline-size: 12ch;
+    font-size: clamp(2.6rem, 5vw, 4.5rem);
+    font-weight: 680;
+    letter-spacing: -0.075em;
+    line-height: 0.98;
+  }
+
+  .registro__titulo span {
+    color: var(--action-primary);
+  }
+
+  .registro__descripcion {
+    max-inline-size: 43ch;
+    color: var(--text-secondary);
+    font-size: clamp(0.95rem, 1.2vw, 1.08rem);
+    line-height: 1.7;
+  }
+
+  .registro__recordatorio {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: start;
+    gap: var(--space-3);
+    max-inline-size: 27rem;
+    margin-block-start: var(--space-3);
+    padding: var(--space-4);
+    border: 1px solid var(--border-accent-soft);
+    border-radius: var(--radius-lg);
+    background: var(--surface-card-accent);
+    color: var(--text-primary);
+  }
+
+  .registro__recordatorio-icono {
+    display: grid;
+    inline-size: 1.7rem;
+    block-size: 1.7rem;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--accent-surface);
+    color: var(--accent-text);
+  }
+
+  .registro__recordatorio p {
+    font-size: 0.84rem;
+    line-height: 1.55;
+  }
+
+  .registro__tarjeta {
+    display: grid;
+    gap: var(--space-5);
+    min-inline-size: 0;
+    padding: clamp(1.25rem, 3vw, 2.25rem);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-xl);
+    background: var(--surface-card);
+    box-shadow: var(--shadow-card);
+  }
+
+  .registro__tarjeta-cabecera {
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .registro__titulo-formulario {
+    color: var(--text-primary);
+    font-size: clamp(1.55rem, 2.5vw, 2rem);
+    font-weight: 700;
+    letter-spacing: -0.055em;
+  }
+
+  .registro__texto-formulario {
+    color: var(--text-secondary);
+    font-size: 0.88rem;
+    line-height: 1.5;
+  }
+
+  .formulario-registro {
+    display: grid;
+    gap: var(--space-5);
+    min-inline-size: 0;
+  }
+
+  .formulario-registro__grupo {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-4);
+    min-inline-size: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  .formulario-registro__leyenda {
+    grid-column: 1 / -1;
+    inline-size: 100%;
+    margin-block-end: var(--space-1);
+    padding-block-end: var(--space-2);
+    border-block-end: 1px solid var(--border-subtle);
+    color: var(--text-primary);
+    font-size: 0.83rem;
+    font-weight: 700;
+  }
+
+  .campo-registro {
+    display: grid;
+    align-content: start;
+    gap: var(--space-2);
+    min-inline-size: 0;
+  }
+
+  .campo-registro__etiqueta {
+    color: var(--text-primary);
+    font-size: 0.8rem;
+    font-weight: 650;
+  }
+
+  .campo-registro__control {
+    inline-size: 100%;
+    min-inline-size: 0;
+    min-block-size: 3rem;
+    padding: 0.7rem 0.85rem;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    background: var(--field-surface);
+    color: var(--field-text);
+    accent-color: var(--action-primary);
+    transition:
+      border-color var(--transition-interactive),
+      background var(--transition-interactive),
+      box-shadow var(--transition-interactive);
+  }
+
+  .campo-registro__control::placeholder {
+    color: var(--field-placeholder);
+    opacity: 1;
+  }
+
+  .campo-registro__control:hover {
+    border-color: var(--border-default);
+  }
+
+  .campo-registro__control:focus-visible {
+    border-color: var(--focus-ring);
+  }
+
+  .campo-registro__control[aria-invalid="true"] {
+    border-color: var(--status-error);
+  }
+
+  .campo-registro__ayuda {
+    color: var(--text-muted);
+    font-size: 0.72rem;
+    line-height: 1.45;
+  }
+
+  .campo-registro__error {
+    color: var(--status-error);
+    font-size: 0.74rem;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  .campo-registro__error:empty {
+    display: none;
+  }
+
+  .formulario-registro__grupo--personal {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .campo-registro--condiciones {
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: start;
+    column-gap: var(--space-3);
+    row-gap: var(--space-1);
+    padding-block-start: var(--space-2);
+  }
+
+  .campo-registro__casilla {
+    inline-size: 1.15rem;
+    block-size: 1.15rem;
+    margin: 0.1rem 0 0;
+    accent-color: var(--action-primary);
+  }
+
+  .campo-registro__casilla[aria-invalid="true"] {
+    outline: 2px solid var(--status-error);
+    outline-offset: 2px;
+  }
+
+  .campo-registro__texto-condiciones {
+    color: var(--text-secondary);
+    font-size: 0.78rem;
+    line-height: 1.5;
+  }
+
+  .campo-registro__error--condiciones {
+    grid-column: 2;
+  }
+
+  .formulario-registro__enviar {
+    inline-size: 100%;
+    min-block-size: 3.1rem;
+    cursor: pointer;
+  }
+
+  .formulario-registro__privacidad {
+    margin-block-start: calc(-1 * var(--space-3));
+    color: var(--text-muted);
+    font-size: 0.72rem;
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  .formulario-registro__estado {
+    color: var(--status-success);
+    font-size: 0.82rem;
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  .formulario-registro__estado:empty {
+    display: none;
+  }
+
+  .registro__pie {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    padding-block-start: var(--space-4);
+    border-block-start: 1px solid var(--border-subtle);
+    color: var(--text-muted);
+  }
+
+  .registro__pie p {
+    max-inline-size: 70ch;
+    font-size: 0.7rem;
+    line-height: 1.5;
+  }
+
+  .registro__pie span {
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.08em;
+  }
+
+  @media (hover: hover) {
+    .registro__marca:hover .registro__marca-nombre {
+      color: var(--action-primary);
+    }
+  }
+
+  @media (max-width: 58rem) {
+    .registro__contenido {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-8);
+      inline-size: min(100%, 42rem);
+    }
+
+    .registro__introduccion {
+      gap: var(--space-3);
+    }
+
+    .registro__titulo {
+      max-inline-size: 15ch;
+      font-size: clamp(2.5rem, 7vw, 3.8rem);
+    }
+
+    .registro__recordatorio {
+      max-inline-size: none;
+    }
+  }
+
+  @media (max-width: 38rem) {
+    .registro {
+      inline-size: min(32rem, calc(100% - var(--space-4) - var(--space-4)));
+      gap: var(--space-5);
+    }
+
+    .registro__cabecera {
+      align-items: flex-start;
+    }
+
+    .registro__marca {
+      grid-template-columns: 2.35rem auto;
+    }
+
+    .registro__simbolo {
+      inline-size: 2.35rem;
+      block-size: 2.35rem;
+    }
+
+    .registro__marca-nombre {
+      font-size: 1.5rem;
+    }
+
+    .registro__marca-descriptor {
+      font-size: 0.48rem;
+    }
+
+    .registro__acceso-existente {
+      display: grid;
+      justify-items: end;
+      gap: 0;
+      max-inline-size: 9.5rem;
+      font-size: 0.72rem;
+      text-align: end;
+    }
+
+    .registro__acceso-existente .enlace-texto {
+      min-block-size: 2rem;
+      font-size: 0.78rem;
+    }
+
+    .registro__contenido {
+      gap: var(--space-5);
+      padding-block: 0;
+    }
+
+    .registro__titulo {
+      font-size: clamp(2.35rem, 11vw, 3.3rem);
+    }
+
+    .registro__tarjeta {
+      gap: var(--space-4);
+      padding: var(--space-4);
+      border-radius: var(--radius-lg);
+    }
+
+    .formulario-registro__grupo {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-3);
+    }
+
+    .formulario-registro__leyenda {
+      grid-column: 1;
+    }
+
+    .registro__pie {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .campo-registro__control {
+      transition: none;
+    }
+  }
+}
+
+
+/* ==========================================
+   INICIO DE SESIÓN
+   Acceso al espacio personal de Syntia
+========================================== */
+
+@layer components {
+  .pagina-login {
+    min-block-size: 100vh;
+    background:
+      radial-gradient(
+        circle at 88% 18%,
+        var(--surface-card-accent) 0,
+        transparent 26rem
+      ),
+      var(--surface-page);
+  }
+
+  .login {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: clamp(1.5rem, 3vw, 2.75rem);
+    inline-size: min(76rem, calc(100% - var(--layout-gutter) - var(--layout-gutter)));
+    min-block-size: 100vh;
+    margin-inline: auto;
+    padding-block: clamp(1.25rem, 3vw, 2.5rem) var(--space-5);
+  }
+
+  .login__cabecera {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding-block-end: var(--space-4);
+    border-block-end: 1px solid var(--border-subtle);
+  }
+
+  .login__marca {
+    display: inline-grid;
+    grid-template-columns: 2.8rem auto;
+    align-items: center;
+    column-gap: var(--space-2);
+    color: var(--text-primary);
+  }
+
+  .login__simbolo {
+    grid-row: span 2;
+    inline-size: 2.8rem;
+    block-size: 2.8rem;
+    color: var(--action-primary);
+  }
+
+  .login__marca-texto {
+    display: grid;
+    gap: 0.1rem;
+  }
+
+  .login__marca-nombre {
+    font-size: 1.8rem;
+    font-weight: 730;
+    letter-spacing: -0.075em;
+    line-height: 1;
+  }
+
+  .login__marca-descriptor {
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+  }
+
+  .login__registro {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--space-2);
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    text-align: end;
+  }
+
+  .login__contenido {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    align-items: center;
+    gap: clamp(2rem, 5vw, 5.5rem);
+    inline-size: min(100%, 68rem);
+    margin-inline: auto;
+    padding-block: var(--space-4);
+  }
+
+  .login__introduccion {
+    display: grid;
+    align-content: center;
+    justify-items: start;
+    gap: var(--space-4);
+    min-inline-size: 0;
+  }
+
+  .login__ceja,
+  .login__paso {
+    color: var(--accent-text);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+  }
+
+  .login__titulo {
+    max-inline-size: 12ch;
+    font-size: clamp(2.6rem, 5vw, 4.5rem);
+    font-weight: 680;
+    letter-spacing: -0.075em;
+    line-height: 0.98;
+  }
+
+  .login__titulo span {
+    color: var(--action-primary);
+  }
+
+  .login__descripcion {
+    max-inline-size: 43ch;
+    color: var(--text-secondary);
+    font-size: clamp(0.95rem, 1.2vw, 1.08rem);
+    line-height: 1.7;
+  }
+
+  .login__recordatorio {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: start;
+    gap: var(--space-3);
+    max-inline-size: 27rem;
+    margin-block-start: var(--space-3);
+    padding: var(--space-4);
+    border: 1px solid var(--border-accent-soft);
+    border-radius: var(--radius-lg);
+    background: var(--surface-card-accent);
+    color: var(--text-primary);
+  }
+
+  .login__recordatorio-icono {
+    display: grid;
+    inline-size: 1.7rem;
+    block-size: 1.7rem;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--accent-surface);
+    color: var(--accent-text);
+  }
+
+  .login__recordatorio p {
+    font-size: 0.84rem;
+    line-height: 1.55;
+  }
+
+  .login__tarjeta {
+    display: grid;
+    align-content: start;
+    gap: var(--space-5);
+    min-inline-size: 0;
+    padding: clamp(1.25rem, 3vw, 2.25rem);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-xl);
+    background: var(--surface-card);
+    box-shadow: var(--shadow-card);
+  }
+
+  .login__tarjeta-cabecera {
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .login__titulo-formulario {
+    color: var(--text-primary);
+    font-size: clamp(1.55rem, 2.5vw, 2rem);
+    font-weight: 700;
+    letter-spacing: -0.055em;
+  }
+
+  .login__texto-formulario {
+    color: var(--text-secondary);
+    font-size: 0.88rem;
+    line-height: 1.5;
+  }
+
+  .formulario-login {
+    display: grid;
+    gap: var(--space-5);
+    min-inline-size: 0;
+  }
+
+  .formulario-login__grupo {
+    display: grid;
+    gap: var(--space-4);
+    min-inline-size: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  .formulario-login__leyenda {
+    inline-size: 100%;
+    margin-block-end: var(--space-1);
+    padding-block-end: var(--space-2);
+    border-block-end: 1px solid var(--border-subtle);
+    color: var(--text-primary);
+    font-size: 0.83rem;
+    font-weight: 700;
+  }
+
+  .campo-login {
+    display: grid;
+    align-content: start;
+    gap: var(--space-2);
+    min-inline-size: 0;
+  }
+
+  .campo-login__etiqueta {
+    color: var(--text-primary);
+    font-size: 0.8rem;
+    font-weight: 650;
+  }
+
+  .campo-login__control {
+    inline-size: 100%;
+    min-inline-size: 0;
+    min-block-size: 3rem;
+    padding: 0.7rem 0.85rem;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    background: var(--field-surface);
+    color: var(--field-text);
+    accent-color: var(--action-primary);
+    transition:
+      border-color var(--transition-interactive),
+      background var(--transition-interactive),
+      box-shadow var(--transition-interactive);
+  }
+
+  .campo-login__control:hover {
+    border-color: var(--border-default);
+  }
+
+  .campo-login__control:focus-visible {
+    border-color: var(--focus-ring);
+  }
+
+  .campo-login__control[aria-invalid="true"] {
+    border-color: var(--status-error);
+  }
+
+  .campo-login__ayuda {
+    color: var(--text-muted);
+    font-size: 0.72rem;
+    line-height: 1.45;
+  }
+
+  .campo-login__error {
+    color: var(--status-error);
+    font-size: 0.74rem;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  .campo-login__error:empty {
+    display: none;
+  }
+
+  .formulario-login__enviar {
+    inline-size: 100%;
+    min-block-size: 3.1rem;
+    cursor: pointer;
+  }
+
+  .formulario-login__nota {
+    margin-block-start: calc(-1 * var(--space-3));
+    color: var(--text-muted);
+    font-size: 0.72rem;
+    line-height: 1.55;
+    text-align: center;
+  }
+
+  .formulario-login__estado {
+    color: var(--status-success);
+    font-size: 0.82rem;
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  .formulario-login__estado:empty {
+    display: none;
+  }
+
+  .login__pie {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    padding-block-start: var(--space-4);
+    border-block-start: 1px solid var(--border-subtle);
+    color: var(--text-muted);
+  }
+
+  .login__pie p {
+    max-inline-size: 70ch;
+    font-size: 0.7rem;
+    line-height: 1.5;
+  }
+
+  .login__pie span {
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.08em;
+  }
+
+  @media (hover: hover) {
+    .login__marca:hover .login__marca-nombre {
+      color: var(--action-primary);
+    }
+  }
+
+  @media (max-width: 58rem) {
+    .login__contenido {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-8);
+      inline-size: min(100%, 42rem);
+    }
+
+    .login__introduccion {
+      gap: var(--space-3);
+    }
+
+    .login__titulo {
+      max-inline-size: 15ch;
+      font-size: clamp(2.5rem, 7vw, 3.8rem);
+    }
+
+    .login__recordatorio {
+      max-inline-size: none;
+    }
+  }
+
+  @media (max-width: 38rem) {
+    .login {
+      inline-size: min(32rem, calc(100% - var(--space-4) - var(--space-4)));
+      gap: var(--space-5);
+    }
+
+    .login__cabecera {
+      align-items: flex-start;
+    }
+
+    .login__marca {
+      grid-template-columns: 2.35rem auto;
+    }
+
+    .login__simbolo {
+      inline-size: 2.35rem;
+      block-size: 2.35rem;
+    }
+
+    .login__marca-nombre {
+      font-size: 1.5rem;
+    }
+
+    .login__marca-descriptor {
+      font-size: 0.48rem;
+    }
+
+    .login__registro {
+      display: grid;
+      justify-items: end;
+      gap: 0;
+      max-inline-size: 10rem;
+      font-size: 0.72rem;
+      text-align: end;
+    }
+
+    .login__registro .enlace-texto {
+      min-block-size: 2rem;
+      font-size: 0.78rem;
+    }
+
+    .login__contenido {
+      gap: var(--space-5);
+      padding-block: 0;
+    }
+
+    .login__titulo {
+      font-size: clamp(2.35rem, 11vw, 3.3rem);
+    }
+
+    .login__tarjeta {
+      gap: var(--space-4);
+      padding: var(--space-4);
+      border-radius: var(--radius-lg);
+    }
+
+    .login__pie {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .campo-login__control {
+      transition: none;
+    }
+  }
+}
+
+
+/* ==========================================
+   CONTACTO
+   Formulario de consulta de Syntia
+========================================== */
+
+@layer components {
+  .pagina-contacto {
+    min-block-size: 100vh;
+    background:
+      radial-gradient(
+        circle at 88% 14%,
+        var(--surface-card-accent) 0,
+        transparent 27rem
+      ),
+      var(--surface-page);
+  }
+
+  .contacto {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: clamp(1.5rem, 3vw, 2.75rem);
+    inline-size: min(80rem, calc(100% - var(--layout-gutter) - var(--layout-gutter)));
+    min-block-size: 100vh;
+    margin-inline: auto;
+    padding-block: clamp(1.25rem, 3vw, 2.5rem) var(--space-5);
+  }
+
+  .contacto__cabecera {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding-block-end: var(--space-4);
+    border-block-end: 1px solid var(--border-subtle);
+  }
+
+  .contacto__marca {
+    display: inline-grid;
+    grid-template-columns: 2.8rem auto;
+    align-items: center;
+    column-gap: var(--space-2);
+    color: var(--text-primary);
+  }
+
+  .contacto__simbolo {
+    grid-row: span 2;
+    inline-size: 2.8rem;
+    block-size: 2.8rem;
+    color: var(--action-primary);
+  }
+
+  .contacto__marca-texto {
+    display: grid;
+    gap: 0.1rem;
+  }
+
+  .contacto__marca-nombre {
+    font-size: 1.75rem;
+    font-weight: 730;
+    letter-spacing: -0.075em;
+    line-height: 1;
+  }
+
+  .contacto__marca-descriptor {
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.12em;
+  }
+
+  .contacto__enlaces {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--space-3);
+  }
+
+  .contacto__enlaces .enlace-texto {
+    min-block-size: 2.5rem;
+    font-size: 0.8rem;
+  }
+
+  .contacto__contenido {
+    display: grid;
+    grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
+    align-items: start;
+    gap: clamp(2rem, 5vw, 5rem);
+    inline-size: min(100%, 72rem);
+    margin-inline: auto;
+    padding-block: var(--space-4);
+  }
+
+  .contacto__introduccion {
+    position: sticky;
+    inset-block-start: var(--space-8);
+    display: grid;
+    align-content: start;
+    justify-items: start;
+    gap: var(--space-4);
+    min-inline-size: 0;
+    padding-block-start: var(--space-4);
+  }
+
+  .contacto__ceja,
+  .contacto__paso {
+    color: var(--accent-text);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+  }
+
+  .contacto__titulo {
+    max-inline-size: 12ch;
+    font-size: clamp(2.6rem, 5vw, 4.35rem);
+    font-weight: 680;
+    letter-spacing: -0.075em;
+    line-height: 0.98;
+  }
+
+  .contacto__titulo span {
+    color: var(--action-primary);
+  }
+
+  .contacto__descripcion {
+    max-inline-size: 44ch;
+    color: var(--text-secondary);
+    font-size: clamp(0.95rem, 1.2vw, 1.08rem);
+    line-height: 1.7;
+  }
+
+  .contacto__recordatorio {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: start;
+    gap: var(--space-3);
+    max-inline-size: 29rem;
+    margin-block-start: var(--space-3);
+    padding: var(--space-4);
+    border: 1px solid var(--border-accent-soft);
+    border-radius: var(--radius-lg);
+    background: var(--surface-card-accent);
+    color: var(--text-primary);
+  }
+
+  .contacto__recordatorio-icono {
+    display: grid;
+    inline-size: 1.7rem;
+    block-size: 1.7rem;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--accent-surface);
+    color: var(--accent-text);
+  }
+
+  .contacto__recordatorio p {
+    font-size: 0.84rem;
+    line-height: 1.55;
+  }
+
+  .contacto__tarjeta {
+    display: grid;
+    align-content: start;
+    gap: var(--space-5);
+    min-inline-size: 0;
+    padding: clamp(1.25rem, 3vw, 2.25rem);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-xl);
+    background: var(--surface-card);
+    box-shadow: var(--shadow-card);
+  }
+
+  .contacto__tarjeta-cabecera {
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .contacto__titulo-formulario {
+    color: var(--text-primary);
+    font-size: clamp(1.55rem, 2.5vw, 2rem);
+    font-weight: 700;
+    letter-spacing: -0.055em;
+  }
+
+  .contacto__texto-formulario {
+    color: var(--text-secondary);
+    font-size: 0.88rem;
+    line-height: 1.5;
+  }
+
+  .formulario-contacto {
+    display: grid;
+    gap: var(--space-5);
+    min-inline-size: 0;
+  }
+
+  .formulario-contacto__grupo {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-4);
+    min-inline-size: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  .formulario-contacto__grupo--consulta {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .formulario-contacto__leyenda {
+    grid-column: 1 / -1;
+    inline-size: 100%;
+    margin-block-end: var(--space-1);
+    padding-block-end: var(--space-2);
+    border-block-end: 1px solid var(--border-subtle);
+    color: var(--text-primary);
+    font-size: 0.83rem;
+    font-weight: 700;
+  }
+
+  .campo-contacto {
+    display: grid;
+    align-content: start;
+    gap: var(--space-2);
+    min-inline-size: 0;
+  }
+
+  .campo-contacto--ancho {
+    grid-column: 1 / -1;
+  }
+
+  .campo-contacto__etiqueta {
+    color: var(--text-primary);
+    font-size: 0.8rem;
+    font-weight: 650;
+  }
+
+  .campo-contacto__opcional {
+    color: var(--text-muted);
+    font-size: 0.72rem;
+    font-weight: 450;
+  }
+
+  .campo-contacto__control {
+    inline-size: 100%;
+    min-inline-size: 0;
+    min-block-size: 3rem;
+    padding: 0.7rem 0.85rem;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    background: var(--field-surface);
+    color: var(--field-text);
+    accent-color: var(--action-primary);
+    transition:
+      border-color var(--transition-interactive),
+      background var(--transition-interactive),
+      box-shadow var(--transition-interactive);
+  }
+
+  .campo-contacto__control::placeholder {
+    color: var(--field-placeholder);
+    opacity: 1;
+  }
+
+  .campo-contacto__control:hover {
+    border-color: var(--border-default);
+  }
+
+  .campo-contacto__control:focus-visible {
+    border-color: var(--focus-ring);
+  }
+
+  .campo-contacto__control[aria-invalid="true"] {
+    border-color: var(--status-error);
+  }
+
+  .campo-contacto__control--area {
+    min-block-size: 10rem;
+    line-height: 1.55;
+    resize: vertical;
+  }
+
+  .campo-contacto__ayuda {
+    color: var(--text-muted);
+    font-size: 0.72rem;
+    line-height: 1.45;
+  }
+
+  .campo-contacto__error {
+    color: var(--status-error);
+    font-size: 0.74rem;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  .campo-contacto__error:empty {
+    display: none;
+  }
+
+  .campo-contacto--preferencia {
+    grid-template-columns: auto minmax(0, 1fr);
+    align-content: center;
+    align-items: start;
+    column-gap: var(--space-3);
+    row-gap: var(--space-1);
+    padding-block-start: 1.8rem;
+  }
+
+  .campo-contacto__casilla {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    inline-size: 1.15rem;
+    block-size: 1.15rem;
+    margin: 0.1rem 0 0;
+    accent-color: var(--action-primary);
+  }
+
+  .campo-contacto__casilla[aria-invalid="true"] {
+    outline: 2px solid var(--status-error);
+    outline-offset: 2px;
+  }
+
+  .campo-contacto__texto-casilla {
+    grid-column: 2;
+    color: var(--text-secondary);
+    font-size: 0.78rem;
+    font-weight: 600;
+    line-height: 1.5;
+  }
+
+  .campo-contacto--preferencia .campo-contacto__ayuda {
+    grid-column: 2;
+  }
+
+  .campo-contacto__contador {
+    justify-self: end;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .formulario-contacto__enviar {
+    inline-size: 100%;
+    min-block-size: 3.1rem;
+    cursor: pointer;
+  }
+
+  .formulario-contacto__privacidad {
+    margin-block-start: calc(-1 * var(--space-3));
+    color: var(--text-muted);
+    font-size: 0.72rem;
+    line-height: 1.55;
+    text-align: center;
+  }
+
+  .formulario-contacto__estado {
+    color: var(--status-success);
+    font-size: 0.82rem;
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  .formulario-contacto__estado:empty {
+    display: none;
+  }
+
+  .contacto__mensajes {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    padding-block-start: var(--space-4);
+    border-block-start: 1px solid var(--border-subtle);
+    color: var(--text-secondary);
+    font-size: 0.78rem;
+    text-align: center;
+  }
+
+  .contacto__mensajes .enlace-texto {
+    min-block-size: 2rem;
+    font-size: inherit;
+  }
+
+  .contacto__pie {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    padding-block-start: var(--space-4);
+    border-block-start: 1px solid var(--border-subtle);
+    color: var(--text-muted);
+  }
+
+  .contacto__pie p {
+    max-inline-size: 70ch;
+    font-size: 0.7rem;
+    line-height: 1.5;
+  }
+
+  .contacto__pie span {
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.08em;
+  }
+
+  @media (hover: hover) {
+    .contacto__marca:hover .contacto__marca-nombre {
+      color: var(--action-primary);
+    }
+  }
+
+  @media (max-width: 58rem) {
+    .contacto__contenido {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-8);
+      inline-size: min(100%, 46rem);
+    }
+
+    .contacto__introduccion {
+      position: static;
+      gap: var(--space-3);
+      padding-block-start: 0;
+    }
+
+    .contacto__titulo {
+      max-inline-size: 15ch;
+      font-size: clamp(2.5rem, 7vw, 3.8rem);
+    }
+
+    .contacto__descripcion {
+      max-inline-size: 60ch;
+    }
+
+    .contacto__recordatorio {
+      max-inline-size: none;
+    }
+  }
+
+  @media (max-width: 38rem) {
+    .contacto {
+      inline-size: min(46rem, calc(100% - var(--space-4) - var(--space-4)));
+      gap: var(--space-5);
+    }
+
+    .contacto__cabecera {
+      align-items: flex-start;
+    }
+
+    .contacto__marca {
+      grid-template-columns: 2.35rem auto;
+    }
+
+    .contacto__simbolo {
+      inline-size: 2.35rem;
+      block-size: 2.35rem;
+    }
+
+    .contacto__marca-nombre {
+      font-size: 1.5rem;
+    }
+
+    .contacto__marca-descriptor {
+      font-size: 0.48rem;
+    }
+
+    .contacto__enlaces {
+      display: grid;
+      justify-items: end;
+      gap: 0;
+      max-inline-size: 11rem;
+      font-size: 0.72rem;
+      text-align: end;
+    }
+
+    .contacto__enlaces .enlace-texto {
+      min-block-size: 2rem;
+      font-size: 0.72rem;
+    }
+
+    .contacto__contenido {
+      gap: var(--space-5);
+      padding-block: 0;
+    }
+
+    .contacto__titulo {
+      font-size: clamp(2.35rem, 11vw, 3.3rem);
+    }
+
+    .contacto__tarjeta {
+      gap: var(--space-4);
+      padding: var(--space-4);
+      border-radius: var(--radius-lg);
+    }
+
+    .formulario-contacto__grupo {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-3);
+    }
+
+    .formulario-contacto__leyenda,
+    .campo-contacto--ancho {
+      grid-column: 1;
+    }
+
+    .campo-contacto--preferencia {
+      padding-block-start: var(--space-1);
+    }
+
+    .contacto__mensajes {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .contacto__pie {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .campo-contacto__control {
+      transition: none;
+    }
+  }
+
+  .tarjeta-apoyo__contacto {
+    justify-self: start;
+    font-size: 0.78rem;
+  }
+}

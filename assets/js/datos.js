@@ -147,6 +147,17 @@ export const entradasDiarias = [
     creadoEn: "2026-11-16T09:42:00",
     actualizadoEn: "2026-11-16T09:42:00",
   },
+  {
+    id: "entrada-014",
+    fecha: "2026-11-23",
+    horasSueno: 3.5,
+    nivelEnergia: 1,
+    nivelEstres: 8,
+    notas:
+      "No he podido dormir a duras penas, lo que me ha generado gran estrés durante toda la jornada.",
+    creadoEn: "2026-11-23T09:46:00",
+    actualizadoEn: "2026-11-23T09:46:00",
+  },
 ];
 
 // ======================================================
