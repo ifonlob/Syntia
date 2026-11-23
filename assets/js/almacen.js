@@ -31,7 +31,7 @@ export const obtenerPorId = (coleccion, id) => {
 };
 
 export const crear = (coleccion, dato) => {
-  const datos = leerColeccion(coleccion);
+  let datos = leerColeccion(coleccion);
 
   datos = [...datos, dato];
 
