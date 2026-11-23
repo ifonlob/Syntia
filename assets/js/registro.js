@@ -69,4 +69,22 @@ export const inicializarFormularioRegistro = () => {
 
     return !mensajeError;
   };
+
+  formulario.addEventListener("focusout", (evento) => {
+    const campo = evento.target;
+
+    if (!campos.includes(campo)) return;
+
+    camposTocados.add(campo);
+
+    validarCampo(campo);
+  });
+
+  formulario.addEventListener("input", (evento) => {
+    const campo = evento.target;
+
+    if (!camposTocados.has(campo)) return;
+
+    validarCampo(campo);
+  });
 };
