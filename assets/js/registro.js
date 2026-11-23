@@ -87,4 +87,19 @@ export const inicializarFormularioRegistro = () => {
 
     validarCampo(campo);
   });
+
+  formulario.addEventListener("submit", (evento) => {
+    evento.preventDefault();
+
+    campos.forEach((campo) => camposTocados.add(campo));
+
+    const camposInvalidos = campos.filter((campo) => !validarCampo(campo));
+
+    if (camposInvalidos.length > 0) {
+      camposInvalidos[0].focus();
+      return;
+    }
+
+    // TODO: lógica de registro de usuarios
+  });
 };
