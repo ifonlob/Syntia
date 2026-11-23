@@ -135,6 +135,9 @@ const cargarMedicacion = (
 };
 
 export const cargarHistorial = (entradasDiarias) => {
+  const entradasOrdenadas = [...entradasDiarias].sort((a, b) =>
+    a.fecha.localeCompare(b.fecha)
+  );
   const contenedorPrincipal = document.querySelector(".contenido-seccion");
   const cabecera = document.createElement("header");
   const imagenCalendario = document.createElement("span");
@@ -162,7 +165,7 @@ export const cargarHistorial = (entradasDiarias) => {
   contenedorPrincipal.append(cabecera);
   contenedorPrincipal.append(historialListado);
 
-  entradasDiarias.forEach((entrada) => {
+  entradasOrdenadas.forEach((entrada) => {
     const tarjeta = document.createElement("article");
     const cabeceraTarjeta = document.createElement("header");
     const fechaTarjeta = document.createElement("time");
