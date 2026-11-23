@@ -4,6 +4,7 @@ import { cargarHistorial } from "./ui.js";
 import { obtenerTodos } from "./almacen.js";
 import { inicializarDatos } from "./inicializarDatos.js";
 import { inicializarFormularioRegistro } from "./registro.js";
+import { inicializarFormularioLogin } from "./login.js";
 
 const paginaActual = document.body.dataset.page;
 
@@ -59,6 +60,9 @@ const cargarSeccion = (seccionActual) => {
 switch (paginaActual) {
   case "registro":
     inicializarFormularioRegistro();
+    break;
+  case "login":
+    inicializarFormularioLogin();
     break;
 
   case "seccion": {
