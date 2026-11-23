@@ -1,14 +1,57 @@
 "use strict";
-const mostrarDetalles = (entrada) => {
+
+import {
+  aparicionesSintomas,
+  definicionesSintomas,
+  medicamentos,
+  tomasMedicacion,
+} from "./datos.js";
+
+const mostrarDetalles = (
+  entradaSeleccionada,
+  definicionesSintomas,
+  aparicionesSintomas,
+  medicamentos,
+  tomasMedicacion
+) => {
   const modal = document.querySelector("#dialogo-detalles");
+  const fechaDetalle = document.querySelector("#fecha-detalle");
+  const horasSueno = document.querySelector("#detalle-horas-sueno");
+  const nivelEnergia = document.querySelector("#detalle-nivel-energia");
+  const nivelEstres = document.querySelector("#detalle-nivel-estres");
+  const notaPersonal = document.querySelector("#nota-personal-detalle");
   const contenedorSintomas = document.querySelector("#lista-sintomas-detalle");
   const contenedorMedicacion = document.querySelector(
     "#lista-medicacion-detalle"
   );
-  const botonCerrado = document.querySelector("#cerrar-dialogo-detalles");
 
   contenedorSintomas.replaceChildren();
   contenedorMedicacion.replaceChildren();
+
+  fechaDetalle.textContent = entradaSeleccionada.fecha;
+
+  horasSueno.textContent = `${entradaSeleccionada.horasSueno} horas`;
+  nivelEnergia.textContent = `${entradaSeleccionada.nivelEnergia}/10`;
+  nivelEstres.textContent = `${entradaSeleccionada.nivelEstres}/10`;
+
+  notaPersonal.textContent =
+    entradaSeleccionada.notas || "No se añadió ninguna nota personal.";
+
+  cargarSintomas(
+    entradaSeleccionada,
+    definicionesSintomas,
+    aparicionesSintomas,
+    contenedorSintomas
+  );
+
+  cargarMedicacion(
+    entradaSeleccionada,
+    medicamentos,
+    tomasMedicacion,
+    contenedorMedicacion
+  );
+
+  modal.showModal();
 };
 
 const cargarSintomas = (
@@ -37,24 +80,61 @@ const cargarSintomas = (
     );
 
     const nombreSintoma = sintoma ? sintoma.nombre : aparicion.nombreRegistrado;
-
-    elemento.textContent = `${nombreSintoma} — Intensidad: ${aparicion.intensidad}`;
+    elemento.textContent = `${nombreSintoma}
+Intensidad: ${aparicion.intensidad}`;
 
     if (aparicion.nota) {
-      elemento.textContent += ` — ${aparicion.nota}`;
+      elemento.textContent += `\nNota: ${aparicion.nota}`;
     }
 
     contenedorSintomas.append(elemento);
   });
 };
 
-export const cargarHistorial = (
-  entradasDiarias,
-  definicionesSintomas,
-  aparicionesSintomas,
+const cargarMedicacion = (
+  entrada,
   medicamentos,
-  tomasMedicacion
+  tomasMedicacion,
+  contenedorMedicacion
 ) => {
+  const tomasEntrada = tomasMedicacion.filter(
+    (toma) => toma.entradaId === entrada.id
+  );
+
+  if (tomasEntrada.length === 0) {
+    const mensaje = document.createElement("li");
+
+    mensaje.textContent = "No se registraron tomas este día.";
+
+    contenedorMedicacion.append(mensaje);
+    return;
+  }
+
+  tomasEntrada.forEach((toma) => {
+    const elemento = document.createElement("li");
+
+    const medicamento = medicamentos.find(
+      (medicamento) => medicamento.id === toma.medicamentoId
+    );
+
+    const nombreMedicamento = medicamento
+      ? medicamento.nombre
+      : toma.nombreMedicamentoRegistrado;
+
+    elemento.textContent = `${nombreMedicamento}
+    Dosis: ${toma.dosisTexto}
+    Hora: ${toma.hora}
+    Estado: ${toma.estado}`;
+
+    if (toma.nota) {
+      elemento.textContent += `\n${toma.nota}`;
+    }
+
+    contenedorMedicacion.append(elemento);
+  });
+};
+
+export const cargarHistorial = (entradasDiarias) => {
   const contenedorPrincipal = document.querySelector(".contenido-seccion");
   const cabecera = document.createElement("header");
   const imagenCalendario = document.createElement("span");
@@ -200,10 +280,6 @@ export const cargarHistorial = (
   historialListado.addEventListener("click", (evento) => {
     const boton = evento.target.closest(".tarjeta-entrada__boton");
 
-    if (!boton) {
-      return;
-    }
-
     const tarjeta = boton.closest(".tarjeta-entrada");
     const entradaId = tarjeta.dataset.entradaId;
 
@@ -211,6 +287,18 @@ export const cargarHistorial = (
       (entrada) => entrada.id === entradaId
     );
 
-    mostrarDetalles(entradaSeleccionada);
+    mostrarDetalles(
+      entradaSeleccionada,
+      definicionesSintomas,
+      aparicionesSintomas,
+      medicamentos,
+      tomasMedicacion
+    );
+  });
+
+  const botonCerrado = document.querySelector("#cerrar-dialogo-detalles");
+  const modal = document.querySelector("#dialogo-detalles");
+  botonCerrado.addEventListener("click", () => {
+    modal.close();
   });
 };
