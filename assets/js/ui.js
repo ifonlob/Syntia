@@ -323,7 +323,7 @@ export const mostrarDatosPerfil = (usuario) => {
   subtitulo.classList.add("seccion-introduccion__subtitulo");
 
   titulo.textContent = "Mi perfil";
-  subtitulo.textContent = "Consulta los datos de tu cuenta";
+  subtitulo.textContent = "Consulta y gestiona los datos de tu cuenta";
 
   cabecera.append(titulo);
   cabecera.append(subtitulo);
@@ -389,8 +389,34 @@ export const mostrarDatosPerfil = (usuario) => {
     listaDatos.append(fila);
   });
 
+  const acciones = document.createElement("div");
+  const enlaceEditar = document.createElement("a");
+  const botonEliminar = document.createElement("button");
+
+  acciones.classList.add("tarjeta-perfil__acciones");
+
+  enlaceEditar.href = "./registro.html?modo=editar";
+  enlaceEditar.classList.add("boton", "boton--principal");
+
+  enlaceEditar.textContent = "Editar perfil";
+
+  botonEliminar.type = "button";
+  botonEliminar.classList.add("boton", "tarjeta-perfil__boton--eliminar");
+
+  botonEliminar.dataset.accion = "eliminar-cuenta";
+  botonEliminar.textContent = "Eliminar cuenta";
+
+  acciones.append(enlaceEditar);
+  acciones.append(botonEliminar);
+
+  const estadoPerfil = document.createElement("p");
+
+  estadoPerfil.classList.add("tarjeta-perfil__estado");
+
   tarjeta.append(tituloTarjeta);
   tarjeta.append(listaDatos);
+  tarjeta.append(acciones);
+  tarjeta.append(estadoPerfil);
 
   contenedorPrincipal.append(cabecera);
   contenedorPrincipal.append(tarjeta);
