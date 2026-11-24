@@ -54,6 +54,9 @@ const cargarSeccion = (seccionActual) => {
     case "preferencias": {
       break;
     }
+    case "perfil": {
+      break;
+    }
   }
 };
 
