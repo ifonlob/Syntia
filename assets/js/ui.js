@@ -139,6 +139,9 @@ export const cargarHistorial = (entradasDiarias) => {
     a.fecha.localeCompare(b.fecha)
   );
   const contenedorPrincipal = document.querySelector(".contenido-seccion");
+
+  if (!contenedorPrincipal || !entradasDiarias) return;
+
   const cabecera = document.createElement("header");
   const imagenCalendario = document.createElement("span");
   const titulo = document.createElement("h2");
@@ -304,4 +307,91 @@ export const cargarHistorial = (entradasDiarias) => {
   botonCerrado.addEventListener("click", () => {
     modal.close();
   });
+};
+
+export const mostrarDatosPerfil = (usuario) => {
+  const contenedorPrincipal = document.querySelector(".contenido-seccion");
+
+  if (!contenedorPrincipal || !usuario) return;
+
+  const cabecera = document.createElement("header");
+  const titulo = document.createElement("h2");
+  const subtitulo = document.createElement("p");
+
+  cabecera.classList.add("seccion-introduccion__cabecera");
+  titulo.classList.add("seccion-introduccion__titulo");
+  subtitulo.classList.add("seccion-introduccion__subtitulo");
+
+  titulo.textContent = "Mi perfil";
+  subtitulo.textContent = "Consulta los datos de tu cuenta";
+
+  cabecera.append(titulo);
+  cabecera.append(subtitulo);
+
+  const tarjeta = document.createElement("article");
+  const tituloTarjeta = document.createElement("h3");
+  const listaDatos = document.createElement("ul");
+
+  tarjeta.classList.add("tarjeta-perfil");
+  tituloTarjeta.classList.add("tarjeta-perfil__titulo");
+  listaDatos.classList.add("tarjeta-perfil__lista");
+
+  tituloTarjeta.textContent = "Información personal";
+
+  const formatearFecha = (fecha) => {
+    if (!fecha) return "No disponible";
+
+    const fechaFormateada = new Date(
+      fecha.length === 10 ? `${fecha}T00:00:00` : fecha
+    );
+
+    if (Number.isNaN(fechaFormateada.getTime())) {
+      return "No disponible";
+    }
+
+    return new Intl.DateTimeFormat("es-ES").format(fechaFormateada);
+  };
+
+  const datosUsuario = [
+    {
+      etiqueta: "Nombre de usuario",
+      valor: usuario.nombreUsuario,
+    },
+    {
+      etiqueta: "Correo electrónico",
+      valor: usuario.email,
+    },
+    {
+      etiqueta: "Fecha de nacimiento",
+      valor: formatearFecha(usuario.fechaNacimiento),
+    },
+    {
+      etiqueta: "Cuenta creada",
+      valor: formatearFecha(usuario.creadoEn),
+    },
+  ];
+
+  datosUsuario.forEach((dato) => {
+    const fila = document.createElement("li");
+    const etiqueta = document.createElement("span");
+    const valor = document.createElement("span");
+
+    fila.classList.add("tarjeta-perfil__dato");
+    etiqueta.classList.add("tarjeta-perfil__etiqueta");
+    valor.classList.add("tarjeta-perfil__valor");
+
+    etiqueta.textContent = dato.etiqueta;
+    valor.textContent = dato.valor || "No disponible";
+
+    fila.append(etiqueta);
+    fila.append(valor);
+
+    listaDatos.append(fila);
+  });
+
+  tarjeta.append(tituloTarjeta);
+  tarjeta.append(listaDatos);
+
+  contenedorPrincipal.append(cabecera);
+  contenedorPrincipal.append(tarjeta);
 };
