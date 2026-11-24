@@ -5,6 +5,7 @@ import { obtenerTodos } from "./almacen.js";
 import { inicializarDatos } from "./inicializarDatos.js";
 import { inicializarFormularioRegistro } from "./registro.js";
 import { inicializarFormularioLogin } from "./login.js";
+import { inicializarPerfil } from "./perfil.js";
 
 const paginaActual = document.body.dataset.page;
 
@@ -55,6 +56,7 @@ const cargarSeccion = (seccionActual) => {
       break;
     }
     case "perfil": {
+      inicializarPerfil();
       break;
     }
   }
