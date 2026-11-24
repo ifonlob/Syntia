@@ -9,6 +9,8 @@ import {
   validarCondiciones,
 } from "./validacion.js";
 
+import { crear } from "./almacen.js";
+
 export const inicializarFormularioRegistro = () => {
   const formulario = document.querySelector("#formulario-registro");
 
@@ -20,16 +22,32 @@ export const inicializarFormularioRegistro = () => {
     ),
   ];
 
+  const campoNombreUsuario = formulario.elements.namedItem("nombreUsuario");
+  const campoEmail = formulario.elements.namedItem("email");
+  const campoPassword = formulario.elements.namedItem("password");
+  const campoConfirmacionPassword = formulario.elements.namedItem(
+    "confirmacionPassword"
+  );
+  const campoFechaNacimiento = formulario.elements.namedItem("fechaNacimiento");
+  const campoAceptaCondiciones =
+    formulario.elements.namedItem("aceptaCondiciones");
+
+  const campoUsuarioId = formulario.elements.namedItem("usuarioId");
+  const estadoRegistro = formulario.querySelector("#estado-registro");
+
   const camposTocados = new Set();
 
   const mostrarError = (campo, mensajeError) => {
-    const identificadorError = campo.getAttribute("aria-describedby");
+    const identificador = campo.getAttribute("aria-describedby");
 
-    const elementoError = document.getElementById(identificadorError);
+    if (!identificador) return;
+
+    const elementoError = document.getElementById(identificador);
 
     if (!elementoError) return;
 
     elementoError.textContent = mensajeError ?? "";
+
     campo.setAttribute("aria-invalid", String(Boolean(mensajeError)));
   };
 
@@ -51,7 +69,7 @@ export const inicializarFormularioRegistro = () => {
 
       case "confirmacionPassword":
         mensajeError = validarConfirmacionPassword(
-          formulario.elements.namedItem("password").value,
+          campoPassword.value,
           campo.value
         );
         break;
@@ -70,6 +88,26 @@ export const inicializarFormularioRegistro = () => {
     return !mensajeError;
   };
 
+  const generarIdUsuario = () => {
+    if (globalThis.crypto?.randomUUID) {
+      return `usuario-${globalThis.crypto.randomUUID()}`;
+    }
+
+    return `usuario-${Date.now()}`;
+  };
+
+  const limpiarFormulario = () => {
+    formulario.reset();
+
+    camposTocados.clear();
+
+    campos.forEach((campo) => {
+      mostrarError(campo, null);
+    });
+
+    campoUsuarioId.value = "";
+  };
+
   formulario.addEventListener("focusout", (evento) => {
     const campo = evento.target;
 
@@ -83,13 +121,36 @@ export const inicializarFormularioRegistro = () => {
   formulario.addEventListener("input", (evento) => {
     const campo = evento.target;
 
+    if (estadoRegistro) {
+      estadoRegistro.textContent = "";
+    }
+
     if (!camposTocados.has(campo)) return;
 
     validarCampo(campo);
+
+    if (
+      campo === campoPassword &&
+      camposTocados.has(campoConfirmacionPassword)
+    ) {
+      validarCampo(campoConfirmacionPassword);
+    }
+  });
+
+  formulario.addEventListener("change", (evento) => {
+    const campo = evento.target;
+
+    if (campos.includes(campo) && camposTocados.has(campo)) {
+      validarCampo(campo);
+    }
   });
 
   formulario.addEventListener("submit", (evento) => {
     evento.preventDefault();
+
+    if (estadoRegistro) {
+      estadoRegistro.textContent = "";
+    }
 
     campos.forEach((campo) => camposTocados.add(campo));
 
@@ -100,6 +161,44 @@ export const inicializarFormularioRegistro = () => {
       return;
     }
 
-    // TODO: lógica de registro de usuarios
+    const nuevoUsuario = {
+      id: generarIdUsuario(),
+      nombreUsuario: campoNombreUsuario.value.trim(),
+      email: campoEmail.value.trim(),
+      fechaNacimiento: campoFechaNacimiento.value,
+      aceptaCondiciones: campoAceptaCondiciones.checked,
+      creadoEn: new Date().toISOString(),
+      actualizadoEn: new Date().toISOString(),
+    };
+
+    try {
+      crear("usuarios", nuevoUsuario);
+    } catch (error) {
+      console.error("No se pudo guardar el usuario:", error);
+
+      if (estadoRegistro) {
+        estadoRegistro.textContent =
+          "No se ha podido crear la cuenta. Inténtalo de nuevo.";
+      }
+
+      return;
+    }
+
+    try {
+      sessionStorage.setItem("usuarioActivoId", nuevoUsuario.id);
+    } catch (error) {
+      console.error("No se pudo identificar al usuario activo:", error);
+    }
+
+    limpiarFormulario();
+
+    if (estadoRegistro) {
+      estadoRegistro.textContent =
+        "Tu cuenta se ha creado correctamente. Redirigiendo...";
+    }
+
+    setTimeout(() => {
+      window.location.href = "./index.html";
+    }, 3000);
   });
 };
