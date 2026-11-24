@@ -2130,7 +2130,6 @@
   }
 }
 
-
 /* ==========================================
    REGISTRO DE USUARIOS
    Vista de creación y edición de perfil
@@ -2152,7 +2151,10 @@
     display: grid;
     grid-template-rows: auto 1fr auto;
     gap: clamp(1.5rem, 3vw, 2.75rem);
-    inline-size: min(76rem, calc(100% - var(--layout-gutter) - var(--layout-gutter)));
+    inline-size: min(
+      76rem,
+      calc(100% - var(--layout-gutter) - var(--layout-gutter))
+    );
     min-block-size: 100vh;
     margin-inline: auto;
     padding-block: clamp(1.25rem, 3vw, 2.5rem) var(--space-5);
@@ -2597,7 +2599,6 @@
   }
 }
 
-
 /* ==========================================
    INICIO DE SESIÓN
    Acceso al espacio personal de Syntia
@@ -2619,7 +2620,10 @@
     display: grid;
     grid-template-rows: auto 1fr auto;
     gap: clamp(1.5rem, 3vw, 2.75rem);
-    inline-size: min(76rem, calc(100% - var(--layout-gutter) - var(--layout-gutter)));
+    inline-size: min(
+      76rem,
+      calc(100% - var(--layout-gutter) - var(--layout-gutter))
+    );
     min-block-size: 100vh;
     margin-inline: auto;
     padding-block: clamp(1.25rem, 3vw, 2.5rem) var(--space-5);
@@ -3011,7 +3015,6 @@
   }
 }
 
-
 /* ==========================================
    CONTACTO
    Formulario de consulta de Syntia
@@ -3033,7 +3036,10 @@
     display: grid;
     grid-template-rows: auto 1fr auto;
     gap: clamp(1.5rem, 3vw, 2.75rem);
-    inline-size: min(80rem, calc(100% - var(--layout-gutter) - var(--layout-gutter)));
+    inline-size: min(
+      80rem,
+      calc(100% - var(--layout-gutter) - var(--layout-gutter))
+    );
     min-block-size: 100vh;
     margin-inline: auto;
     padding-block: clamp(1.25rem, 3vw, 2.5rem) var(--space-5);
@@ -3545,5 +3551,114 @@
   .tarjeta-apoyo__contacto {
     justify-self: start;
     font-size: 0.78rem;
+  }
+}
+
+/* ==========================================
+   MI PERFIL
+   Tarjeta de información personal
+========================================== */
+
+@layer components {
+  .tarjeta-perfil {
+    display: grid;
+    align-content: start;
+    gap: var(--space-5);
+    inline-size: min(100%, 56rem);
+    min-inline-size: 0;
+    padding: clamp(1.25rem, 2.5vw, 2rem);
+    border: 1px solid var(--border-card-featured);
+    border-radius: var(--radius-xl);
+    background: linear-gradient(
+      135deg,
+      var(--surface-card-soft) 0%,
+      var(--surface-card) 65%,
+      var(--surface-card-strong) 100%
+    );
+    box-shadow: var(--shadow-card);
+  }
+
+  .tarjeta-perfil__titulo {
+    padding-block-end: var(--space-3);
+    border-block-end: 1px solid var(--border-subtle);
+    color: var(--text-primary);
+    font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+    font-weight: 680;
+    letter-spacing: -0.035em;
+  }
+
+  .tarjeta-perfil__lista {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-3);
+    min-inline-size: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .tarjeta-perfil__dato {
+    display: grid;
+    align-content: start;
+    gap: var(--space-2);
+    min-inline-size: 0;
+    min-block-size: 5.5rem;
+    padding: var(--space-4);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    background: var(--surface-empty);
+    transition:
+      border-color var(--duration-fast),
+      background var(--duration-fast);
+  }
+
+  .tarjeta-perfil__etiqueta {
+    color: var(--text-secondary);
+    font-size: 0.78rem;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  .tarjeta-perfil__valor {
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-weight: 680;
+    line-height: 1.45;
+    overflow-wrap: anywhere;
+  }
+
+  @media (hover: hover) {
+    .tarjeta-perfil__dato:hover {
+      border-color: var(--border-card-featured);
+      background: var(--surface-card);
+    }
+  }
+
+  @media (max-width: 38rem) {
+    .tarjeta-perfil {
+      gap: var(--space-4);
+      padding: var(--space-4);
+      border-radius: var(--radius-lg);
+    }
+
+    .tarjeta-perfil__lista {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-2);
+    }
+
+    .tarjeta-perfil__dato {
+      min-block-size: auto;
+      padding: var(--space-3);
+    }
+
+    .tarjeta-perfil__valor {
+      font-size: 0.94rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tarjeta-perfil__dato {
+      transition: none;
+    }
   }
 }
