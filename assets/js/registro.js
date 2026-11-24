@@ -69,7 +69,7 @@ export const inicializarFormularioRegistro = () => {
     campoConfirmacionPassword.disabled = true;
     campoAceptaCondiciones.disabled = true;
 
-    const grupoContrasena = formulario.querySelector("[data-grupo-contrasena]");
+    const grupoContrasena = formulario.querySelector("#grupo-seguridad");
 
     if (grupoContrasena) {
       grupoContrasena.hidden = true;
