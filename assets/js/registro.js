@@ -9,18 +9,12 @@ import {
   validarCondiciones,
 } from "./validacion.js";
 
-import { crear } from "./almacen.js";
+import { crear, obtenerPorId, actualizar } from "./almacen.js";
 
 export const inicializarFormularioRegistro = () => {
   const formulario = document.querySelector("#formulario-registro");
 
   if (!formulario) return;
-
-  const campos = [
-    ...formulario.querySelectorAll(
-      'input:not([type="hidden"]), select, textarea'
-    ),
-  ];
 
   const campoNombreUsuario = formulario.elements.namedItem("nombreUsuario");
   const campoEmail = formulario.elements.namedItem("email");
@@ -36,6 +30,57 @@ export const inicializarFormularioRegistro = () => {
   const estadoRegistro = formulario.querySelector("#estado-registro");
 
   const camposTocados = new Set();
+
+  const parametros = new URLSearchParams(window.location.search);
+  const modoEdicion = parametros.get("modo") === "editar";
+
+  let usuarioEnEdicion = null;
+
+  if (modoEdicion) {
+    const usuarioActivoId = sessionStorage.getItem("usuarioActivoId");
+
+    if (!usuarioActivoId) {
+      if (estadoRegistro) {
+        estadoRegistro.textContent =
+          "No hay ningún usuario activo para editar.";
+      }
+
+      return;
+    }
+
+    usuarioEnEdicion = obtenerPorId("usuarios", usuarioActivoId);
+
+    if (!usuarioEnEdicion) {
+      if (estadoRegistro) {
+        estadoRegistro.textContent =
+          "No se ha encontrado el usuario que quieres editar.";
+      }
+
+      return;
+    }
+
+    campoUsuarioId.value = usuarioEnEdicion.id;
+    campoNombreUsuario.value = usuarioEnEdicion.nombreUsuario;
+    campoEmail.value = usuarioEnEdicion.email;
+    campoFechaNacimiento.value = usuarioEnEdicion.fechaNacimiento;
+    campoAceptaCondiciones.checked = usuarioEnEdicion.aceptaCondiciones;
+
+    campoPassword.disabled = true;
+    campoConfirmacionPassword.disabled = true;
+    campoAceptaCondiciones.disabled = true;
+
+    const grupoContrasena = formulario.querySelector("[data-grupo-contrasena]");
+
+    if (grupoContrasena) {
+      grupoContrasena.hidden = true;
+    }
+  }
+
+  const campos = [
+    ...formulario.querySelectorAll(
+      'input:not([type="hidden"]), select, textarea'
+    ),
+  ].filter((campo) => !campo.disabled);
 
   const mostrarError = (campo, mensajeError) => {
     const identificador = campo.getAttribute("aria-describedby");
@@ -151,7 +196,6 @@ export const inicializarFormularioRegistro = () => {
     if (estadoRegistro) {
       estadoRegistro.textContent = "";
     }
-
     campos.forEach((campo) => camposTocados.add(campo));
 
     const camposInvalidos = campos.filter((campo) => !validarCampo(campo));
@@ -161,14 +205,52 @@ export const inicializarFormularioRegistro = () => {
       return;
     }
 
+    const ahora = new Date().toISOString();
+
+    if (modoEdicion) {
+      const usuarioId = campoUsuarioId.value;
+
+      const datosActualizados = {
+        nombreUsuario: campoNombreUsuario.value.trim(),
+        email: campoEmail.value.trim(),
+        fechaNacimiento: campoFechaNacimiento.value,
+        aceptaCondiciones: usuarioEnEdicion.aceptaCondiciones,
+        actualizadoEn: ahora,
+      };
+
+      try {
+        actualizar("usuarios", usuarioId, datosActualizados);
+      } catch (error) {
+        console.error("No se pudo actualizar el usuario:", error);
+
+        if (estadoRegistro) {
+          estadoRegistro.textContent =
+            "No se han podido guardar los cambios. Inténtalo de nuevo.";
+        }
+
+        return;
+      }
+
+      if (estadoRegistro) {
+        estadoRegistro.textContent =
+          "Tu perfil se ha actualizado correctamente. Redirigiendo...";
+      }
+
+      setTimeout(() => {
+        window.location.href = "./seccion.html?seccion=perfil";
+      }, 3000);
+
+      return;
+    }
+
     const nuevoUsuario = {
       id: generarIdUsuario(),
       nombreUsuario: campoNombreUsuario.value.trim(),
       email: campoEmail.value.trim(),
       fechaNacimiento: campoFechaNacimiento.value,
       aceptaCondiciones: campoAceptaCondiciones.checked,
-      creadoEn: new Date().toISOString(),
-      actualizadoEn: new Date().toISOString(),
+      creadoEn: ahora,
+      actualizadoEn: ahora,
     };
 
     try {
