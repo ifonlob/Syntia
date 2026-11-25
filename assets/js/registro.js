@@ -38,9 +38,6 @@ export const inicializarFormularioRegistro = () => {
 
   if (modoEdicion) {
     const usuarioActivoId = sessionStorage.getItem("usuarioActivoId");
-    const botonDeBorrado = document.querySelector(
-      ".tarjeta-perfil__boton--eliminar"
-    );
     const botonDeConfirmacion = document.querySelector(
       "#boton-enviar-registro"
     );
