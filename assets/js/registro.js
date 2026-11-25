@@ -38,6 +38,9 @@ export const inicializarFormularioRegistro = () => {
 
   if (modoEdicion) {
     const usuarioActivoId = sessionStorage.getItem("usuarioActivoId");
+    const botonDeConfirmacion = document.querySelector(
+      "#boton-enviar-registro"
+    );
 
     if (!usuarioActivoId) {
       if (estadoRegistro) {
@@ -59,6 +62,7 @@ export const inicializarFormularioRegistro = () => {
       return;
     }
 
+    botonDeConfirmacion.textContent = "Actualizar Perfil";
     campoUsuarioId.value = usuarioEnEdicion.id;
     campoNombreUsuario.value = usuarioEnEdicion.nombreUsuario;
     campoEmail.value = usuarioEnEdicion.email;
