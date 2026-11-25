@@ -3661,4 +3661,149 @@
       transition: none;
     }
   }
+
+  mensajes__listado {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 28rem), 1fr));
+    align-content: start;
+    gap: var(--space-4);
+    min-inline-size: 0;
+  }
+
+  .tarjeta-mensaje {
+    display: grid;
+    align-content: start;
+    gap: var(--space-4);
+    min-inline-size: 0;
+    padding: clamp(1rem, 1.5vw, 1.4rem);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    background: var(--surface-card);
+    box-shadow: var(--shadow-card);
+    transition:
+      border-color var(--duration-fast),
+      box-shadow var(--duration-fast),
+      transform var(--duration-fast);
+  }
+
+  .tarjeta-mensaje__cabecera {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2) var(--space-3);
+    min-inline-size: 0;
+    padding-block-end: var(--space-3);
+    border-block-end: 1px solid var(--border-subtle);
+  }
+
+  .tarjeta-mensaje__titulo {
+    min-inline-size: 0;
+    color: var(--text-primary);
+    font-size: 1.05rem;
+    font-weight: 680;
+    letter-spacing: -0.025em;
+    line-height: 1.3;
+    overflow-wrap: anywhere;
+  }
+
+  .tarjeta-mensaje__fecha {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    min-block-size: 1.9rem;
+    padding: 0.25rem 0.65rem;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-pill);
+    background: var(--surface-card-soft);
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .tarjeta-mensaje__lista {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-3);
+    min-inline-size: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .tarjeta-mensaje__dato {
+    display: grid;
+    align-content: start;
+    gap: var(--space-1);
+    min-inline-size: 0;
+    padding: var(--space-3);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    background: var(--surface-empty);
+  }
+
+  .tarjeta-mensaje__etiqueta {
+    color: var(--text-secondary);
+    font-size: 0.72rem;
+    font-weight: 600;
+  }
+
+  .tarjeta-mensaje__valor {
+    min-inline-size: 0;
+    color: var(--text-primary);
+    font-size: 0.84rem;
+    font-weight: 620;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+  }
+
+  .tarjeta-mensaje__contenido {
+    display: grid;
+    gap: var(--space-3);
+    min-inline-size: 0;
+    padding: var(--space-4);
+    border: 1px solid var(--border-accent-soft);
+    border-radius: var(--radius-md);
+    background: var(--surface-card-accent);
+  }
+
+  .tarjeta-mensaje__subtitulo {
+    color: var(--text-accent);
+    font-size: 0.85rem;
+    font-weight: 700;
+  }
+
+  .tarjeta-mensaje__texto {
+    color: var(--text-primary);
+    font-size: 0.88rem;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+    white-space: pre-wrap;
+  }
+
+  @media (max-width: 38rem) {
+    .tarjeta-mensaje {
+      gap: var(--space-3);
+      padding: var(--space-4);
+    }
+
+    .tarjeta-mensaje__cabecera {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .tarjeta-mensaje__lista {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-2);
+    }
+
+    .tarjeta-mensaje__dato {
+      padding: var(--space-3);
+    }
+
+    .tarjeta-mensaje__contenido {
+      padding: var(--space-3);
+    }
+  }
 }
