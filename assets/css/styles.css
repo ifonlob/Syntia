@@ -313,6 +313,7 @@
   dl,
   dd {
     all: unset;
+    box-sizing: border-box;
   }
   h1,
   h2,
@@ -346,6 +347,22 @@
   select,
   textarea {
     font: inherit;
+  }
+
+  button {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  button:not(:disabled) {
+    cursor: pointer;
+  }
+
+  button:disabled,
+  input:disabled,
+  select:disabled,
+  textarea:disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
   }
   svg {
     display: block;
@@ -407,10 +424,16 @@
     inset-block-start: 0;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    align-self: start;
     gap: var(--space-8);
+    block-size: 100vh;
+    block-size: 100dvh;
     min-block-size: 100vh;
+    min-block-size: 100dvh;
     padding: var(--space-6) var(--space-4);
-    overflow: auto;
+    overflow-y: auto;
+    overscroll-behavior: contain;
     background: var(--surface-navigation);
     color: var(--text-on-navigation);
   }
@@ -1184,6 +1207,18 @@
     min-inline-size: 0;
   }
 
+  /* Perfil y mensajes no incluyen icono: ocupan toda la cabecera. */
+  .seccion-introduccion__cabecera:not(:has(> .seccion-introduccion__icono)) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .seccion-introduccion__cabecera:not(:has(> .seccion-introduccion__icono))
+    > .seccion-introduccion__titulo,
+  .seccion-introduccion__cabecera:not(:has(> .seccion-introduccion__icono))
+    > .seccion-introduccion__subtitulo {
+    grid-column: 1;
+  }
+
   .historial__listado {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 30rem), 1fr));
@@ -1833,9 +1868,14 @@
     }
     .barra-lateral {
       position: static;
+      inset-block-start: auto;
+      align-self: stretch;
+      block-size: auto;
       min-block-size: auto;
+      justify-content: flex-start;
       gap: var(--space-3);
       padding: var(--space-3) var(--layout-gutter);
+      overflow: visible;
     }
     .marca {
       grid-template-columns: 2.2rem auto;
@@ -2080,6 +2120,8 @@
     .tarjeta-entrada__enlace,
     .tarjeta-sintomas__enlace,
     .actividad-reciente__enlace,
+    .tarjeta-mensaje__boton-borrar,
+    .tarjeta-perfil__acciones,
     .pie-pagina {
       display: none;
     }
@@ -3662,18 +3704,54 @@
     }
   }
 
-  mensajes__listado {
+  /* ==========================================
+     ACCIONES DEL PERFIL
+  ========================================== */
+
+  .tarjeta-perfil__acciones {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3);
+    padding-block-start: var(--space-3);
+    border-block-start: 1px solid var(--border-subtle);
+  }
+
+  .tarjeta-perfil__boton--eliminar {
+    border-color: color-mix(in srgb, var(--status-error), transparent 55%);
+    background: color-mix(in srgb, var(--status-error), transparent 92%);
+    color: var(--status-error);
+    box-shadow: none;
+  }
+
+  .tarjeta-perfil__estado {
+    color: var(--status-success);
+    font-size: 0.82rem;
+    line-height: 1.5;
+  }
+
+  .tarjeta-perfil__estado:empty {
+    display: none;
+  }
+
+  /* ==========================================
+     MENSAJES ENVIADOS
+  ========================================== */
+
+  .mensajes__listado {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 28rem), 1fr));
     align-content: start;
     gap: var(--space-4);
     min-inline-size: 0;
+    inline-size: 100%;
   }
 
   .tarjeta-mensaje {
     display: grid;
     align-content: start;
     gap: var(--space-4);
+    inline-size: 100%;
     min-inline-size: 0;
     padding: clamp(1rem, 1.5vw, 1.4rem);
     border: 1px solid var(--border-subtle);
@@ -3782,6 +3860,59 @@
     white-space: pre-wrap;
   }
 
+  .tarjeta-mensaje__boton-borrar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    justify-self: end;
+    gap: var(--space-2);
+    min-inline-size: 8.5rem;
+    min-block-size: 2.75rem;
+    padding: 0.65rem 1rem;
+    border: 1px solid color-mix(in srgb, var(--status-error), transparent 55%);
+    border-radius: var(--radius-pill);
+    background: color-mix(in srgb, var(--status-error), transparent 92%);
+    color: var(--status-error);
+    font: inherit;
+    font-size: 0.8rem;
+    font-weight: 680;
+    line-height: 1.2;
+    text-align: center;
+    cursor: pointer;
+    transition:
+      color var(--transition-interactive),
+      background var(--transition-interactive),
+      border-color var(--transition-interactive),
+      transform var(--transition-interactive);
+  }
+
+  .tarjeta-mensaje__boton-borrar:active {
+    transform: translateY(0.08rem) scale(0.98);
+  }
+
+  /* Textos largos no deben ensanchar las tarjetas. */
+  .tarjeta-mensaje__titulo,
+  .tarjeta-mensaje__valor,
+  .tarjeta-mensaje__texto,
+  .tarjeta-perfil__valor {
+    overflow-wrap: anywhere;
+  }
+
+  @media (hover: hover) {
+    .tarjeta-mensaje:hover {
+      border-color: var(--border-card-featured);
+      box-shadow: var(--shadow-float);
+      transform: translateY(-2px);
+    }
+
+    .tarjeta-mensaje__boton-borrar:hover,
+    .tarjeta-perfil__boton--eliminar:hover {
+      border-color: var(--status-error);
+      background: color-mix(in srgb, var(--status-error), transparent 84%);
+      transform: translateY(-0.08rem);
+    }
+  }
+
   @media (max-width: 38rem) {
     .tarjeta-mensaje {
       gap: var(--space-3);
@@ -3798,12 +3929,32 @@
       gap: var(--space-2);
     }
 
-    .tarjeta-mensaje__dato {
+    .tarjeta-mensaje__dato,
+    .tarjeta-mensaje__contenido {
       padding: var(--space-3);
     }
 
-    .tarjeta-mensaje__contenido {
-      padding: var(--space-3);
+    .tarjeta-mensaje__boton-borrar {
+      inline-size: 100%;
+      justify-self: stretch;
+    }
+
+    .tarjeta-perfil__acciones {
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .tarjeta-perfil__acciones > .boton {
+      inline-size: 100%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tarjeta-mensaje,
+    .tarjeta-mensaje__boton-borrar,
+    .tarjeta-perfil__dato,
+    .tarjeta-perfil__boton--eliminar {
+      transition: none;
     }
   }
 }
