@@ -421,3 +421,161 @@ export const mostrarDatosPerfil = (usuario) => {
   contenedorPrincipal.append(cabecera);
   contenedorPrincipal.append(tarjeta);
 };
+
+export const cargarMensajes = (mensajes) => {
+  const contenedorPrincipal = document.querySelector(".contenido-seccion");
+
+  if (!contenedorPrincipal || !Array.isArray(mensajes)) return;
+
+  const mensajesOrdenados = [...mensajes].sort((a, b) => {
+    const fechaA = Date.parse(a.creadoEn) || 0;
+    const fechaB = Date.parse(b.creadoEn) || 0;
+
+    return fechaB - fechaA;
+  });
+
+  const cabecera = document.createElement("header");
+  const titulo = document.createElement("h2");
+  const subtitulo = document.createElement("p");
+
+  cabecera.classList.add("seccion-introduccion__cabecera");
+  titulo.classList.add("seccion-introduccion__titulo");
+  subtitulo.classList.add("seccion-introduccion__subtitulo");
+
+  titulo.textContent = "Mensajes enviados";
+  subtitulo.textContent = "Revisa las consultas que has enviado a Syntia";
+
+  cabecera.append(titulo);
+  cabecera.append(subtitulo);
+
+  const mensajesListado = document.createElement("section");
+
+  mensajesListado.classList.add("mensajes__listado");
+
+  contenedorPrincipal.append(cabecera);
+  contenedorPrincipal.append(mensajesListado);
+
+  if (mensajesOrdenados.length === 0) {
+    const mensajeVacio = document.createElement("p");
+
+    mensajeVacio.classList.add("estado-vacio");
+    mensajeVacio.textContent = "Todavía no has enviado ninguna consulta.";
+
+    mensajesListado.append(mensajeVacio);
+    return;
+  }
+
+  const formatearFecha = (fecha) => {
+    if (!fecha) return "No disponible";
+
+    const fechaFormateada = new Date(fecha);
+
+    if (Number.isNaN(fechaFormateada.getTime())) {
+      return "No disponible";
+    }
+
+    return new Intl.DateTimeFormat("es-ES", {
+      dateStyle: "medium",
+      timeStyle: "short",
+    }).format(fechaFormateada);
+  };
+
+  const motivosConsulta = {
+    "problema-tecnico": "Problema técnico",
+    "problema-registro": "Problema con un registro",
+    "privacidad-datos": "Privacidad y datos",
+    "sugerencia-mejora": "Sugerencia de mejora",
+    "otra-consulta": "Otra consulta",
+  };
+
+  mensajesOrdenados.forEach((mensaje) => {
+    const tarjeta = document.createElement("article");
+    const cabeceraTarjeta = document.createElement("header");
+    const tituloTarjeta = document.createElement("h3");
+    const fechaTarjeta = document.createElement("time");
+
+    tarjeta.classList.add("tarjeta-mensaje");
+    cabeceraTarjeta.classList.add("tarjeta-mensaje__cabecera");
+    tituloTarjeta.classList.add("tarjeta-mensaje__titulo");
+    fechaTarjeta.classList.add("tarjeta-mensaje__fecha");
+
+    tituloTarjeta.textContent =
+      motivosConsulta[mensaje.motivo] || "Consulta de contacto";
+
+    fechaTarjeta.textContent = formatearFecha(mensaje.creadoEn);
+
+    if (mensaje.creadoEn) {
+      fechaTarjeta.dateTime = mensaje.creadoEn;
+    }
+
+    cabeceraTarjeta.append(tituloTarjeta);
+    cabeceraTarjeta.append(fechaTarjeta);
+
+    const listaDatos = document.createElement("ul");
+
+    listaDatos.classList.add("tarjeta-mensaje__lista");
+
+    const datosMensaje = [
+      {
+        etiqueta: "Nombre",
+        valor: mensaje.nombre,
+      },
+      {
+        etiqueta: "Correo electrónico",
+        valor: mensaje.email,
+      },
+      {
+        etiqueta: "Teléfono",
+        valor: mensaje.telefono || "No facilitado",
+      },
+      {
+        etiqueta: "Motivo",
+        valor: motivosConsulta[mensaje.motivo] || mensaje.motivo,
+      },
+      {
+        etiqueta: "Preferencia de contacto",
+        valor: mensaje.prefiereLlamada
+          ? "Prefiere que le llamen"
+          : "No ha solicitado una llamada",
+      },
+    ];
+
+    datosMensaje.forEach((dato) => {
+      const fila = document.createElement("li");
+      const etiqueta = document.createElement("span");
+      const valor = document.createElement("span");
+
+      fila.classList.add("tarjeta-mensaje__dato");
+      etiqueta.classList.add("tarjeta-mensaje__etiqueta");
+      valor.classList.add("tarjeta-mensaje__valor");
+
+      etiqueta.textContent = dato.etiqueta;
+      valor.textContent = dato.valor || "No disponible";
+
+      fila.append(etiqueta);
+      fila.append(valor);
+
+      listaDatos.append(fila);
+    });
+
+    const contenidoMensaje = document.createElement("section");
+    const tituloMensaje = document.createElement("h4");
+    const textoMensaje = document.createElement("p");
+
+    contenidoMensaje.classList.add("tarjeta-mensaje__contenido");
+    tituloMensaje.classList.add("tarjeta-mensaje__subtitulo");
+    textoMensaje.classList.add("tarjeta-mensaje__texto");
+
+    tituloMensaje.textContent = "Contenido del mensaje";
+    textoMensaje.textContent = mensaje.mensaje || "Sin contenido.";
+
+    contenidoMensaje.append(tituloMensaje);
+    contenidoMensaje.append(textoMensaje);
+
+    tarjeta.append(cabeceraTarjeta);
+    tarjeta.append(listaDatos);
+    tarjeta.append(contenidoMensaje);
+
+    mensajesListado.append(tarjeta);
+  });
+};
