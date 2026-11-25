@@ -1,10 +1,12 @@
 "use strict";
 
-import { cargarHistorial } from "./ui.js";
+import { cargarHistorial, cargarMensajes } from "./ui.js";
 import { obtenerTodos } from "./almacen.js";
 import { inicializarDatos } from "./inicializarDatos.js";
 import { inicializarFormularioRegistro } from "./registro.js";
 import { inicializarFormularioLogin } from "./login.js";
+import { inicializarFormularioContacto } from "./contacto.js";
+import { inicializarMensajes } from "./mensajes.js";
 import { inicializarPerfil } from "./perfil.js";
 
 const paginaActual = document.body.dataset.page;
@@ -59,6 +61,10 @@ const cargarSeccion = (seccionActual) => {
       inicializarPerfil();
       break;
     }
+    case "mensajes": {
+      const mensajes = obtenerTodos("mensajes");
+      inicializarMensajes();
+    }
   }
 };
 
@@ -68,6 +74,9 @@ switch (paginaActual) {
     break;
   case "login":
     inicializarFormularioLogin();
+    break;
+  case "contacto":
+    inicializarFormularioContacto();
     break;
 
   case "seccion": {
