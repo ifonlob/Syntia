@@ -434,6 +434,8 @@ export const cargarMensajes = (mensajes) => {
     return fechaB - fechaA;
   });
 
+  contenedorPrincipal.replaceChildren();
+
   const cabecera = document.createElement("header");
   const titulo = document.createElement("h2");
   const subtitulo = document.createElement("p");
