@@ -491,18 +491,24 @@ export const cargarMensajes = (mensajes) => {
   mensajesOrdenados.forEach((mensaje) => {
     const tarjeta = document.createElement("article");
     const cabeceraTarjeta = document.createElement("header");
+    const botonBorrar = document.createElement("button");
     const tituloTarjeta = document.createElement("h3");
     const fechaTarjeta = document.createElement("time");
 
     tarjeta.classList.add("tarjeta-mensaje");
     cabeceraTarjeta.classList.add("tarjeta-mensaje__cabecera");
     tituloTarjeta.classList.add("tarjeta-mensaje__titulo");
+    botonBorrar.classList.add("tarjeta-mensaje__boton-borrar");
     fechaTarjeta.classList.add("tarjeta-mensaje__fecha");
+
+    tarjeta.dataset.mensajeId = String(mensaje.id);
+    botonBorrar.type = "button";
+    botonBorrar.dataset.accion = "borrar-mensaje";
 
     tituloTarjeta.textContent =
       motivosConsulta[mensaje.motivo] || "Consulta de contacto";
-
     fechaTarjeta.textContent = formatearFecha(mensaje.creadoEn);
+    botonBorrar.textContent = "Borrar mensaje";
 
     if (mensaje.creadoEn) {
       fechaTarjeta.dateTime = mensaje.creadoEn;
@@ -575,6 +581,7 @@ export const cargarMensajes = (mensajes) => {
     tarjeta.append(cabeceraTarjeta);
     tarjeta.append(listaDatos);
     tarjeta.append(contenidoMensaje);
+    tarjeta.append(botonBorrar);
 
     mensajesListado.append(tarjeta);
   });
